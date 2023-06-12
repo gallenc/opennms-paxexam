@@ -1,0 +1,368 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+   <groupId>org.opennms.example.paxexam</groupId>
+   <artifactId>opennms-paxexam-test-example</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+
+   <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+      <java.version>8</java.version>
+
+      <karafVersion>4.3.6</karafVersion> <!-- same opennms 31 -->
+      <felix.framework.version>6.0.5</felix.framework.version> <!-- same as karaf opennms -->
+
+
+      <pax.exam.karaf.version>4.3.6</pax.exam.karaf.version>
+
+
+      <pax.exam.version>4.13.5</pax.exam.version>
+      <pax.url.version>2.1.0</pax.url.version>
+      <logback.version>1.0.4</logback.version>
+      <slf4j.version>1.7.4</slf4j.version>
+      <log4j.version>2.11.1</log4j.version>
+      <pax.logging.version>2.0.14</pax.logging.version> <!-- same as OpenNMS -->
+      <dependency.swissbox.version>1.8.4</dependency.swissbox.version>
+   </properties>
+
+   <dependencies>
+      <dependency>
+         <groupId>org.ops4j.pax.exam</groupId>
+         <artifactId>pax-exam-junit4</artifactId>
+         <version>${pax.exam.version}</version>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.ops4j.pax.exam</groupId>
+         <artifactId>pax-exam-link-mvn</artifactId>
+         <version>${pax.exam.version}</version>
+         <scope>test</scope>
+      </dependency>
+
+      <!-- <dependency> -->
+      <!-- <groupId>ch.qos.logback</groupId> -->
+      <!-- <artifactId>logback-core</artifactId> -->
+      <!-- <version>${logback.version}</version> -->
+      <!-- <scope>test</scope> -->
+      <!-- </dependency> -->
+
+      <!-- <dependency> -->
+      <!-- <groupId>ch.qos.logback</groupId> -->
+      <!-- <artifactId>logback-classic</artifactId> -->
+      <!-- <version>${logback.version}</version> -->
+      <!-- <scope>test</scope> -->
+      <!-- </dependency> -->
+
+      <dependency>
+         <groupId>org.apache.geronimo.specs</groupId>
+         <artifactId>geronimo-atinject_1.0_spec</artifactId>
+         <version>1.0</version>
+         <scope>provided</scope>
+      </dependency>
+
+      <!-- <dependency> -->
+      <!-- <groupId>org.osgi</groupId> -->
+      <!-- <artifactId>org.osgi.core</artifactId> -->
+      <!-- <version>4.3.1</version> -->
+      <!-- <scope>provided</scope> -->
+      <!-- </dependency> -->
+
+      <!-- <dependency> -->
+      <!-- <groupId>org.apache.logging.log4j</groupId> -->
+      <!-- <artifactId>log4j-api</artifactId> -->
+      <!-- <version>${log4j.version}</version> -->
+      <!-- <scope>test</scope> -->
+      <!-- </dependency> -->
+      <!-- <dependency> -->
+      <!-- <groupId>org.apache.logging.log4j</groupId> -->
+      <!-- <artifactId>log4j-core</artifactId> -->
+      <!-- <version>${log4j.version}</version> -->
+      <!-- <scope>test</scope> -->
+      <!-- </dependency> -->
+      <!-- running SLF4J over log4j -->
+      <!-- <dependency> -->
+      <!-- <groupId>org.apache.logging.log4j</groupId> -->
+      <!-- <artifactId>log4j-slf4j-impl</artifactId> -->
+      <!-- <version>${log4j.version}</version> -->
+      <!-- <scope>test</scope> -->
+      <!-- </dependency> -->
+
+      <dependency>
+         <groupId>org.ops4j.pax.logging</groupId>
+         <artifactId>pax-logging-log4j2</artifactId>
+         <version>${pax.logging.version}</version>
+         <scope>test</scope>
+      </dependency>
+      <dependency>
+         <groupId>org.ops4j.pax.logging</groupId>
+         <artifactId>pax-logging-api</artifactId>
+         <version>${pax.logging.version}</version>
+         <scope>test</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.osgi</groupId>
+         <artifactId>org.osgi.compendium</artifactId>
+         <version>4.3.1</version>
+         <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.slf4j</groupId>
+         <artifactId>slf4j-api</artifactId>
+         <version>${slf4j.version}</version>
+         <scope>provided</scope>
+      </dependency>
+
+      <!-- should be in profile -->
+      <dependency>
+         <groupId>org.ops4j.pax.exam</groupId>
+         <artifactId>pax-exam-container-remote</artifactId>
+         <version>${pax.exam.version}</version>
+         <scope>test</scope>
+      </dependency>
+
+      <!-- <dependency> -->
+      <!-- <groupId>org.ops4j.pax.exam</groupId> -->
+      <!-- <artifactId>pax-exam-container-forked</artifactId> -->
+      <!-- <version>${pax.exam.version}</version> -->
+      <!-- <scope>test</scope> -->
+      <!-- </dependency> -->
+   </dependencies>
+
+   <profiles>
+      <profile>
+         <id>karaf</id>
+         <activation>
+            <activeByDefault>false</activeByDefault>
+         </activation>
+         <properties>
+            <pax.exam.framework>karaf</pax.exam.framework>
+         </properties>
+         <dependencies>
+            <dependency>
+               <groupId>org.ops4j.pax.exam</groupId>
+               <artifactId>pax-exam-container-karaf</artifactId>
+               <version>${pax.exam.version}</version>
+               <scope>test</scope>
+            </dependency>
+            <dependency>
+               <groupId>org.apache.karaf.features</groupId>
+               <artifactId>standard</artifactId>
+               <version>${pax.exam.karaf.version}</version>
+               <classifier>features</classifier>
+               <type>xml</type>
+               <scope>test</scope>
+            </dependency>
+         </dependencies>
+         <build>
+            <plugins>
+               <plugin>
+                  <artifactId>maven-surefire-plugin</artifactId>
+                  <configuration>
+                     <systemPropertyVariables>
+                        <pax.exam.karaf.version>${pax.exam.karaf.version}</pax.exam.karaf.version>
+                     </systemPropertyVariables>
+                  </configuration>
+               </plugin>
+            </plugins>
+         </build>
+      </profile>
+
+      <profile>
+         <id>felix</id>
+         <activation>
+            <activeByDefault>false</activeByDefault>
+         </activation>
+         <properties>
+            <pax.exam.framework>karaf</pax.exam.framework>
+         </properties>
+         <dependencies>
+            <dependency>
+               <groupId>org.apache.felix</groupId>
+               <artifactId>org.apache.felix.framework</artifactId>
+               <!-- <version>4.0.2</version> -->
+               <version>${felix.framework.version}</version>
+               <scope>test</scope>
+            </dependency>
+         </dependencies>
+      </profile>
+
+      <profile>
+         <id>native</id>
+         <activation>
+            <activeByDefault>false</activeByDefault>
+         </activation>
+         <properties>
+            <pax.exam.container>native</pax.exam.container>
+         </properties>
+         <dependencies>
+            <dependency>
+               <groupId>org.ops4j.pax.exam</groupId>
+               <artifactId>pax-exam-container-native</artifactId>
+               <version>${pax.exam.version}</version>
+               <scope>test</scope>
+            </dependency>
+         </dependencies>
+      </profile>
+      <profile>
+         <id>forked</id>
+         <activation>
+            <activeByDefault>true</activeByDefault>
+         </activation>
+         <properties>
+            <pax.exam.container>forked</pax.exam.container>
+         </properties>
+         <dependencies>
+            <dependency>
+               <groupId>org.ops4j.pax.exam</groupId>
+               <artifactId>pax-exam-container-forked</artifactId>
+               <version>${pax.exam.version}</version>
+               <scope>test</scope>
+            </dependency>
+
+            <dependency>
+               <groupId>org.ops4j.pax.url</groupId>
+               <artifactId>pax-url-reference</artifactId>
+               <version>${pax.url.version}</version>
+            </dependency>
+
+            <!-- <dependency> -->
+            <!-- <groupId>org.apache.logging.log4j</groupId> -->
+            <!-- <artifactId>log4j-api</artifactId> -->
+            <!-- <version>${log4j.version}</version> -->
+            <!-- <scope>test</scope> -->
+            <!-- </dependency> -->
+            <!-- <dependency> -->
+            <!-- <groupId>org.apache.logging.log4j</groupId> -->
+            <!-- <artifactId>log4j-core</artifactId> -->
+            <!-- <version>${log4j.version}</version> -->
+            <!-- <scope>test</scope> -->
+            <!-- </dependency> -->
+            <!-- running SLF4J over log4j -->
+            <!-- <dependency> -->
+            <!-- <groupId>org.apache.logging.log4j</groupId> -->
+            <!-- <artifactId>log4j-slf4j-impl</artifactId> -->
+            <!-- <version>${log4j.version}</version> -->
+            <!-- <scope>test</scope> -->
+            <!-- </dependency> -->
+
+
+            <!-- <dependency> -->
+            <!-- <groupId>org.slf4j</groupId> -->
+            <!-- <artifactId>slf4j-api</artifactId> -->
+            <!-- <version>${slf4j.version}</version> -->
+            <!-- </dependency> -->
+
+         </dependencies>
+      </profile>
+
+      <profile>
+         <id>remote</id>
+         <activation>
+            <activeByDefault>false</activeByDefault>
+         </activation>
+         <properties>
+            <pax.exam.container>remote</pax.exam.container>
+         </properties>
+         <dependencies>
+
+            <!-- the default pax exam remote container cannot be found on classpath -->
+            <dependency>
+               <groupId>org.ops4j.pax.exam</groupId>
+               <artifactId>pax-exam-container-remote</artifactId>
+               <version>${pax.exam.version}</version>
+               <scope>test</scope>
+            </dependency>
+
+            <dependency>
+               <groupId>org.ops4j.pax.swissbox</groupId>
+               <artifactId>pax-swissbox-tracker</artifactId>
+               <version>${dependency.swissbox.version}</version>
+            </dependency>
+
+            <!-- this is a repackaged container with META-INF/services which can be found. however it does not run any tests :) -->
+            <!-- <dependency> -->
+            <!-- <groupId>org.opennms.pax</groupId> -->
+            <!-- <artifactId>repackage-pax-exam-container-remote</artifactId> -->
+            <!-- <version>0.0.1-SNAPSHOT</version> -->
+            <!-- <scope>test</scope> -->
+            <!-- </dependency> -->
+
+            <dependency>
+               <groupId>org.ops4j.pax.url</groupId>
+               <artifactId>pax-url-reference</artifactId>
+               <version>${pax.url.version}</version>
+            </dependency>
+
+            <!-- <dependency> -->
+            <!-- <groupId>org.apache.logging.log4j</groupId> -->
+            <!-- <artifactId>log4j-api</artifactId> -->
+            <!-- <version>${log4j.version}</version> -->
+            <!-- <scope>test</scope> -->
+            <!-- </dependency> -->
+            <!-- <dependency> -->
+            <!-- <groupId>org.apache.logging.log4j</groupId> -->
+            <!-- <artifactId>log4j-core</artifactId> -->
+            <!-- <version>${log4j.version}</version> -->
+            <!-- <scope>test</scope> -->
+            <!-- </dependency> -->
+            <!-- running SLF4J over log4j -->
+            <!-- <dependency> -->
+            <!-- <groupId>org.apache.logging.log4j</groupId> -->
+            <!-- <artifactId>log4j-slf4j-impl</artifactId> -->
+            <!-- <version>${log4j.version}</version> -->
+            <!-- <scope>test</scope> -->
+            <!-- </dependency> -->
+
+
+            <!-- <dependency> -->
+            <!-- <groupId>org.slf4j</groupId> -->
+            <!-- <artifactId>slf4j-api</artifactId> -->
+            <!-- <version>${slf4j.version}</version> -->
+            <!-- </dependency> -->
+
+         </dependencies>
+      </profile>
+
+   </profiles>
+
+
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.1</version>
+            <configuration>
+               <source>1.7</source>
+               <target>1.7</target>
+            </configuration>
+         </plugin>
+         <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>properties-maven-plugin</artifactId>
+            <version>1.0.0</version>
+            <executions>
+               <execution>
+                  <goals>
+                     <goal>set-system-properties</goal>
+                  </goals>
+                  <configuration>
+                     <properties>
+                        <property>
+                           <name>sun.rmi.loader.logLevel</name>
+                           <value>ALL</value>
+                        </property>
+                     </properties>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+
+      </plugins>
+   </build>
+</project>
