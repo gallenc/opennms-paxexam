@@ -1,0 +1,129 @@
+---
+version: '3'
+
+# using fixed ip addresses so opennms config works
+# to see all netowrk use docker network ls
+# to see config use docker network inspect minimal-minion-kafka_frontend
+# note gateway is 172.20.0.1 
+networks:
+  frontend:
+    ipam:
+      config:
+        - subnet: 172.20.0.0/24
+
+
+volumes:
+  data-postgres: {}
+  data-opennms: {}
+  data-opennms-cfg: {}
+
+services:
+  database:
+    image: ${DOCKER_REGISTRY:-docker.io}/postgres:${POSTGRES_VERSION:-13}
+    container_name: database
+    hostname: database
+    environment:
+      TZ: ${TIMEZONE:-America/New_York}
+      POSTGRES_HOST: database
+      POSTGRES_PORT: 5432
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - data-postgres:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
+      interval: 10s
+      timeout: 30s
+      retries: 3
+    networks:
+      frontend:
+        ipv4_address: 172.20.0.2
+
+#  horizon:
+#    image: ${DOCKER_REGISTRY:-docker.io}/${DOCKER_ORG:-opennms}/${HORIZON_OCI:-horizon}:${ONMS_VERSION:-bleeding}
+#    container_name: horizon
+#    hostname: horizon
+#    sysctls:
+#      net.ipv4.ping_group_range: "0 429496729"
+#    depends_on:
+#      - database
+#    environment:
+#      TZ: ${TIMEZONE:-America/New_York}
+#    volumes:
+#      - data-opennms:/opennms-data
+#      - data-opennms-cfg:/opt/opennms/etc
+#      - ./container-fs/opt/opennms/deploy:/opt/opennms/deploy
+#      - ./container-fs/opt/opennms-overlay:/opt/opennms-overlay
+#      - ./container-fs/etc/conf.d/confd.toml:/etc/confd/confd.toml
+#    command: ["-s"]
+#    ports:
+#      - "8101:8101/tcp"
+#      - "8980:8980/tcp"
+#      - "10162:1162/udp"
+#      - "55555:55555/tcp" # pax exam rmi port
+#      - "1098:1098/tcp" # java.rmi.activation.port rmi server port - for pax exam
+#    healthcheck:
+#      test: [ "CMD", "curl", "-f", "-I", "http://localhost:8980/opennms/login.jsp" ]
+#      interval: 1m
+#      timeout: 5s
+#      retries: 3
+#    networks:
+#      frontend:
+#        ipv4_address: 172.20.0.6
+
+  # first snmp container
+  cameranetsnmp1:
+    image: polinux/snmpd
+    container_name: cameranetsnmp1
+    hostname: cameranetsnmp1
+    volumes:
+      - ./snmp/snmpd.conf:/etc/snmp/snmpd.conf
+    ports:
+      - "11161:161/udp"
+    networks:
+      frontend:
+        ipv4_address: 172.20.0.30
+
+# second snmp container
+  cameranetsnmp2:
+    image: polinux/snmpd
+    container_name: cameranetsnmp2
+    hostname: cameranetsnmp2
+    volumes:
+      - ./snmp/snmpd.conf:/etc/snmp/snmpd.conf
+    ports:
+      - "11162:161/udp"
+    networks:
+      frontend:
+        ipv4_address: 172.20.0.31
+
+# stand alone karaf container 
+  karaf1:
+    image: ${DOCKER_REGISTRY:-docker.io}/apache/karaf:4.3.6
+    container_name: karaf1
+    hostname: karaf1
+    expose:
+      - "1099"
+      - "44444"
+      - "8101"
+      - "8181"
+    ports:
+      - "18101:8101"
+      - "11099:1099"
+      - "34444:44444"
+      - "18181:8181"
+      - "55555:55555"
+    volumes:
+      - ./karaf1/etc/custom.system.properties:/opt/apache-karaf/etc/custom.system.properties
+      - ./karaf1/etc/users.properties:/opt/apache-karaf/etc/users.properties
+      - ./karaf1/etc/org.ops4j.pax.logging.cfg:/opt/apache-karaf/etc/org.ops4j.pax.logging.cfg
+      - ./karaf1/deploy:/opt/apache-karaf/deploy
+      - ./karaf1/lib/boot/pax-exam-container-rbc-4.13.5.jar:/opt/apache-karaf/lib/boot/pax-exam-container-rbc-4.13.5.jar
+      - ./karaf1/lib/boot/pax-exam-4.13.5.jar:/opt/apache-karaf/lib/boot/pax-exam-4.13.5.jar
+      - ./karaf1/misc:/misc
+    command: karaf
+    stdin_open: true
+    tty: true
+    networks:
+      frontend:
+        ipv4_address: 172.20.0.8

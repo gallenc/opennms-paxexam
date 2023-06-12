@@ -28,6 +28,13 @@
    </properties>
 
    <dependencies>
+
+      <dependency>
+         <groupId>org.opennms.example.paxexam</groupId>
+         <artifactId>opennms-paxexam-container-remote</artifactId>
+         <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+
       <dependency>
          <groupId>org.ops4j.pax.exam</groupId>
          <artifactId>pax-exam-junit4</artifactId>
