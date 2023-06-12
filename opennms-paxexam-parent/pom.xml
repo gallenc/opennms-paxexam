@@ -25,6 +25,7 @@
       <module>pax-exam-container-rbc-onms</module>
       <module>opennms-paxexam-container-remote</module>
       <module>opennms-paxexam-rmi-server</module>
+      <module>pax-exam-features-opennms</module>
    </modules>
 
    <build>

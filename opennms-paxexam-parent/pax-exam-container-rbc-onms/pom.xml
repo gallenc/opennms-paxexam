@@ -12,6 +12,7 @@
    <groupId>org.ops4j.pax.exam</groupId>
    <artifactId>pax-exam-container-rbc-onms</artifactId>
    <packaging>bundle</packaging>
+   <version>${paxexam.version}</version>
 
    <name>OPS4J Pax Exam Remote Bundle Context OpenNMS</name>
 

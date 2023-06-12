@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <groupId>org.opennms.integration.paxexam</groupId>
+   <artifactId>karaf-example</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
+
+   <packaging>pom</packaging>
+
+   <properties>
+      <paxexam.version>4.13.5</paxexam.version>
+   </properties>
+
+   <!-- copies built dependency files to deploy directory -->
+   <build>
+      <plugins>
+         <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-dependency-plugin</artifactId>
+            <version>3.0.1</version>
+            <executions>
+               <execution>
+                  <id>copy</id>
+                  <phase>package</phase>
+                  <goals>
+                     <goal>copy</goal>
+                  </goals>
+                  <configuration>
+                     <artifactItems>
+                        <!-- deploy directory -->
+                        <artifactItem>
+                           <groupId>org.opennms.integration.paxexam</groupId>
+                           <artifactId>opennms-paxexam-rmi-server</artifactId>
+                           <version>0.0.1-SNAPSHOT</version>
+                           <type>jar</type>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>${project.basedir}/karaf1/deploy/</outputDirectory>
+                        </artifactItem>
+                        <artifactItem>
+                           <groupId>org.ops4j.pax.exam</groupId>
+                           <artifactId>pax-exam-features-opennms</artifactId>
+                           <version>${paxexam.version}</version>
+                           <type>xml</type>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>${project.basedir}/karaf1/deploy/</outputDirectory>
+                        </artifactItem>
+                        <artifactItem>
+                           <groupId>org.ops4j.pax.exam</groupId>
+                           <artifactId>pax-exam-container-rbc-onms</artifactId>
+                           <version>${paxexam.version}</version>
+                           <type>jar</type>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>${project.basedir}/karaf1/deploy/</outputDirectory>
+                        </artifactItem>
+                        <!-- Boot directory -->
+                        <artifactItem>
+                           <groupId>org.ops4j.pax.exam</groupId>
+                           <artifactId>pax-exam</artifactId>
+                           <version>${paxexam.version}</version>
+                           <type>jar</type>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>${project.basedir}/karaf1/lib/boot</outputDirectory>
+                        </artifactItem>
+                        <artifactItem>
+                           <groupId>org.ops4j.pax.exam</groupId>
+                           <artifactId>pax-exam-container-rbc-onms</artifactId>
+                           <version>${paxexam.version}</version>
+                           <type>jar</type>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>${project.basedir}/karaf1/lib/boot</outputDirectory>
+                        </artifactItem>
+                        <!-- misc directory - for tests -->
+                        <artifactItem>
+                           <groupId>org.opennms.example.paxexam</groupId>
+                           <artifactId>opennms-paxexam-container-remote</artifactId>
+                           <version>0.0.1-SNAPSHOT</version>
+                           <type>jar</type>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>${project.basedir}/karaf1/misc</outputDirectory>
+                        </artifactItem>
+                     </artifactItems>
+                     <!-- other configurations here -->
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+
+         <plugin>
+            <artifactId>maven-clean-plugin</artifactId>
+            <version>3.1.0</version>
+            <executions>
+               <execution>
+                  <id>default-clean</id>
+                  <phase>clean</phase>
+                  <goals>
+                     <goal>clean</goal>
+                  </goals>
+               </execution>
+               <!-- cleans deployed files from karaf deploy directories -->
+               <execution>
+                  <id>dependency-clean</id>
+                  <phase>clean</phase>
+                  <goals>
+                     <goal>clean</goal>
+                  </goals>
+                  <configuration>
+                     <filesets>
+                        <fileset>
+                           <directory>${project.basedir}/karaf1/lib/boot/</directory>
+                           <followSymlinks>false</followSymlinks>
+                           <excludes>
+                              <exclude>**/README.md</exclude>
+                           </excludes>
+                        </fileset>
+                        <fileset>
+                           <directory>${project.basedir}/karaf1/deploy/</directory>
+                           <followSymlinks>false</followSymlinks>
+                           <excludes>
+                              <exclude>**/README.md</exclude>
+                           </excludes>
+                        </fileset>
+                        <fileset>
+                           <directory>${project.basedir}/karaf1/misc/</directory>
+                           <followSymlinks>false</followSymlinks>
+                           <excludes>
+                              <exclude>**/README.md</exclude>
+                           </excludes>
+                        </fileset>
+                     </filesets>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+
+      </plugins>
+   </build>
+
+</project>

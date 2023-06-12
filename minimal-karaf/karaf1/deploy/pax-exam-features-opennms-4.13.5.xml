@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<features name="pax-exam-features-4.13.5" xmlns="http://karaf.apache.org/xmlns/features/v1.0.0">
+    <feature name="exam-no-junit" version="4.13.5">
+        <bundle>mvn:org.ops4j.base/ops4j-base-exec/${dependency.base.version}</bundle>
+        <bundle>mvn:org.ops4j.base/ops4j-base-lang/${dependency.base.version}</bundle>
+        <bundle>mvn:org.ops4j.base/ops4j-base-monitors/${dependency.base.version}</bundle>
+        <bundle>mvn:org.ops4j.base/ops4j-base-net/${dependency.base.version}</bundle>
+        <bundle>mvn:org.ops4j.base/ops4j-base-store/${dependency.base.version}</bundle>
+        <bundle>mvn:org.ops4j.base/ops4j-base-io/${dependency.base.version}</bundle>
+        <bundle>mvn:org.ops4j.base/ops4j-base-spi/${dependency.base.version}</bundle>
+        <bundle>mvn:org.ops4j.base/ops4j-base-util-property/${dependency.base.version}</bundle>
+
+        <bundle>mvn:org.ops4j.pax.swissbox/pax-swissbox-core/${dependency.swissbox.version}</bundle>
+        <bundle>mvn:org.ops4j.pax.swissbox/pax-swissbox-extender/${dependency.swissbox.version}</bundle>
+        <bundle>mvn:org.ops4j.pax.swissbox/pax-swissbox-lifecycle/${dependency.swissbox.version}</bundle>
+        <bundle>mvn:org.ops4j.pax.swissbox/pax-swissbox-tracker/${dependency.swissbox.version}</bundle>
+        <bundle>mvn:org.ops4j.pax.swissbox/pax-swissbox-framework/${dependency.swissbox.version}</bundle>
+        <bundle>mvn:org.ops4j.pax.exam/pax-exam/4.13.5</bundle>
+        <bundle>mvn:org.ops4j.pax.exam/pax-exam-extender-service/4.13.5</bundle>
+        
+        <bundle>mvn:org.ops4j.pax.exam/pax-exam-container-rbc-onms/4.13.5</bundle>
+        
+        <bundle dependency="true">mvn:org.apache.geronimo.specs/geronimo-atinject_1.0_spec/1.0</bundle>
+        <bundle>mvn:org.ops4j.pax.exam/pax-exam-inject/4.13.5</bundle>
+    </feature>
+    <feature name="exam" version="4.13.5">
+        <feature version="4.13.5">exam-no-junit</feature>
+        <bundle>mvn:org.ops4j.pax.tipi/org.ops4j.pax.tipi.hamcrest.core/${dependency.tipi.hamcrest.version}</bundle>
+        <bundle>mvn:org.ops4j.pax.tipi/org.ops4j.pax.tipi.junit/${dependency.tipi.junit.version}</bundle>
+        <bundle>mvn:org.ops4j.pax.exam/pax-exam-invoker-junit/4.13.5</bundle>
+    </feature>
+</features>
