@@ -14,11 +14,12 @@
    <packaging>bundle</packaging>
    <version>${paxexam.version}</version>
 
-   <name>OPS4J Pax Exam Remote Bundle Context OpenNMS</name>
+   <name>pax-exam-container-rbc-onms</name>
 
    <properties>
       <bundle.symbolicName>${namespace}.rbc.opennms</bundle.symbolicName>
       <bundle.namespace>${namespace}.rbc.opennms</bundle.namespace>
+      <maven-bundle-plugin.version>5.1.4</maven-bundle-plugin.version>
    </properties>
 
    <build>
@@ -26,6 +27,20 @@
          <plugin>
             <groupId>org.apache.felix</groupId>
             <artifactId>maven-bundle-plugin</artifactId>
+            <extensions>true</extensions>
+            <configuration>
+               <instructions>
+                  <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+                  <Bundle-Version>${project.version}</Bundle-Version>
+                  <Bundle-Activator>org.ops4j.pax.exam.rbc.internal.Activator</Bundle-Activator>
+                  <Export-Package>
+                     org.ops4j.pax.exam.rbc.internal*;version=${project.version}
+                  </Export-Package>
+                  <Import-Package>
+                     *
+                  </Import-Package>
+               </instructions>
+            </configuration>
          </plugin>
       </plugins>
    </build>

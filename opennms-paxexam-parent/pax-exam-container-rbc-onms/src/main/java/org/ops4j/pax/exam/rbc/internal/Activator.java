@@ -66,11 +66,17 @@ public class Activator implements BundleActivator {
 
     @Override
     public synchronized void start(final BundleContext bundleContext) throws Exception {
+
         String host = getHost();
         String name = getName();
         Integer port = getPort();
+        
+        //TODO CHANGE
+        System.out.println("******************************* starting pax-exam-container-rbc-onms");
+    	LOG.error("starting pax-exam-container-rbc-onms host="+host+ "  name="+name+ " port="+port);
+    	
         if (host == null || port == null || name == null) {
-            LOG.info("Name, port or host is null. So this RBC remains inactive.");
+            LOG.warn("Name, port or host is null. So this RBC remains inactive.");
             return;
         }
         // !! Absolutely necessary for RMIClassLoading to work
@@ -85,7 +91,7 @@ public class Activator implements BundleActivator {
                     valid = register(bundleContext);
                     if (!valid) {
                         try {
-                            LOG.debug(MSG_RETRY);
+                            LOG.warn(MSG_RETRY);
                             Thread.sleep(500);
                         }
                         catch (InterruptedException e) {
@@ -114,12 +120,12 @@ public class Activator implements BundleActivator {
                         String host = getHost();
                         String name = getName();
 
-                        LOG.debug("Trying to find registry on [host=" + host + " port=" + port
+                        LOG.warn("Trying to find registry on [host=" + host + " port=" + port
                             + "]");
                         registry = LocateRegistry.getRegistry(getHost(), getPort());
 
                         bindRBC(registry, name, bundleContext);
-                        LOG.debug("Container with name " + name + " has added its RBC");
+                        LOG.warn("Container with name " + name + " has added its RBC");
 
                         return null;
                     }
@@ -137,7 +143,7 @@ public class Activator implements BundleActivator {
 
     private void bindRBC(Registry _registry, String name, BundleContext bundleContext)
         throws RemoteException, BundleException {
-        LOG.debug("Now Binding " + RemoteBundleContext.class.getSimpleName() + " as name=" + name
+        LOG.warn("Now Binding " + RemoteBundleContext.class.getSimpleName() + " as name=" + name
             + " to RMI registry");
         remoteBundleContext = new RemoteBundleContextImpl(bundleContext.getBundle(0)
             .getBundleContext());
@@ -148,6 +154,9 @@ public class Activator implements BundleActivator {
 
     @Override
     public synchronized void stop(BundleContext bundleContext) throws Exception {
+    	//TODO
+    	LOG.error("stopping pax-exam-container-rbc-onms ");
+    	
         if (registerRBCThread != null) {
             registerRBCThread.interrupt();
             String name = getName();
@@ -160,7 +169,7 @@ public class Activator implements BundleActivator {
             }
             registry = null;
             remoteBundleContext = null;
-            LOG.debug("Container with name " + name + " has removed its RBC");
+            LOG.warn("Container with name " + name + " has removed its RBC");
         }
     }
 

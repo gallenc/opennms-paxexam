@@ -13,7 +13,7 @@
     <version>${paxexam.version}</version>
     <packaging>pom</packaging>
 
-    <name>OPS4J Pax Exam Karaf features</name>
+    <name>OPS4J Pax Exam Karaf features (OpenNMS)</name>
 
     <properties>
         <bundle.symbolicName>${namespace}</bundle.symbolicName>

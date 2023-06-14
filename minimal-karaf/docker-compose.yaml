@@ -12,33 +12,7 @@ networks:
         - subnet: 172.20.0.0/24
 
 
-volumes:
-  data-postgres: {}
-  data-opennms: {}
-  data-opennms-cfg: {}
-
 services:
-  database:
-    image: ${DOCKER_REGISTRY:-docker.io}/postgres:${POSTGRES_VERSION:-13}
-    container_name: database
-    hostname: database
-    environment:
-      TZ: ${TIMEZONE:-America/New_York}
-      POSTGRES_HOST: database
-      POSTGRES_PORT: 5432
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-    volumes:
-      - data-postgres:/var/lib/postgresql/data
-    healthcheck:
-      test: [ "CMD-SHELL", "pg_isready -U postgres" ]
-      interval: 10s
-      timeout: 30s
-      retries: 3
-    networks:
-      frontend:
-        ipv4_address: 172.20.0.2
-
 
 # stand alone karaf container 
   karaf1:
@@ -57,11 +31,13 @@ services:
       - "18181:8181"
       - "55555:55555"
     volumes:
+      - ~/.m2:/root/.m2
       - ./karaf1/etc/custom.system.properties:/opt/apache-karaf/etc/custom.system.properties
       - ./karaf1/etc/users.properties:/opt/apache-karaf/etc/users.properties
       - ./karaf1/etc/org.ops4j.pax.logging.cfg:/opt/apache-karaf/etc/org.ops4j.pax.logging.cfg
+      - ./karaf1/etc/org.ops4j.pax.url.mvn.cfg:/opt/apache-karaf/etc/org.ops4j.pax.url.mvn.cfg
       - ./karaf1/deploy:/opt/apache-karaf/deploy
-      - ./karaf1/lib/boot/pax-exam-container-rbc-4.13.5.jar:/opt/apache-karaf/lib/boot/pax-exam-container-rbc-4.13.5.jar
+      - ./karaf1/lib/boot/pax-exam-container-rbc-onms-4.13.5.jar:/opt/apache-karaf/lib/boot/pax-exam-container-rbc-onms-4.13.5.jar
       - ./karaf1/lib/boot/pax-exam-4.13.5.jar:/opt/apache-karaf/lib/boot/pax-exam-4.13.5.jar
       - ./karaf1/misc:/misc
     command: karaf
