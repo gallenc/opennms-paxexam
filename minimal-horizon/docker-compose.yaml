@@ -50,7 +50,7 @@ services:
     environment:
       TZ: ${TIMEZONE:-America/New_York}
     volumes:
-      - ~/.m2:/usr/share/opennms/.m2/repository
+      - ~/.m2/repository:/usr/share/opennms/.m2/repository
       - data-opennms:/opennms-data
       - data-opennms-cfg:/opt/opennms/etc
       - ./container-fs/opt/opennms/deploy:/opt/opennms/deploy
