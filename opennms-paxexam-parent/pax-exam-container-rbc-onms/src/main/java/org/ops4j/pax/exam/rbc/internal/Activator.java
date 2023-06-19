@@ -26,6 +26,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.concurrent.Callable;
 
+import org.opennms.integrate.paxexam.rmitestserver.PaxexamRMIServerSocketFactory;
 import org.ops4j.pax.exam.rbc.Constants;
 import org.ops4j.pax.swissbox.core.ContextClassLoaderUtils;
 import org.osgi.framework.BundleActivator;
@@ -148,7 +149,12 @@ public class Activator implements BundleActivator {
         remoteBundleContext = new RemoteBundleContextImpl(bundleContext.getBundle(0)
             .getBundleContext());
         // changed port from 0 which creates random port to specific port
-        Remote remoteStub = UnicastRemoteObject.exportObject(remoteBundleContext, getPort());
+        // added local serversocketfactory to separate from OpenNMS factory
+        //Remote remoteStub = UnicastRemoteObject.exportObject(remoteBundleContext, getPort());
+        
+        PaxexamRMIServerSocketFactory paxexamRMIServerSocketFactory = new PaxexamRMIServerSocketFactory(getHost());
+        
+        Remote remoteStub = UnicastRemoteObject.exportObject(remoteBundleContext, getPort(), paxexamRMIServerSocketFactory, paxexamRMIServerSocketFactory);
         _registry.rebind(getName(), remoteStub);
     }
 

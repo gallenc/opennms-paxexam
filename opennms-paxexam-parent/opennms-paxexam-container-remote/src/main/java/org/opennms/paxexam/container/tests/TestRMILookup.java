@@ -13,7 +13,7 @@ import java.util.List;
 
 // java -cp opennms-paxexam-container-remote-0.0.1-SNAPSHOT.jar:pax-exam-container-rbc-onms-4.13.5.jar:pax-exam-4.13.5.jar org.opennms.paxexam.container.tests.TestRMILookup localhost 55555
 // on opennms try
-// java -cp opennms-paxexam-container-remote-0.0.1-SNAPSHOT.jar:pax-exam-container-rbc-onms-4.13.5.jar:pax-exam-4.13.5.jar:../lib/osgi.core-7.0.0.jar org.opennms.paxexam.container.tests.TestRMILookup localhost 55555
+// java -cp opennms-paxexam-rmi-server-0.0.1-SNAPSHOT.jar:opennms-paxexam-container-remote-0.0.1-SNAPSHOT.jar:pax-exam-container-rbc-onms-4.13.5.jar:pax-exam-4.13.5.jar:../lib/osgi.core-7.0.0.jar org.opennms.paxexam.container.tests.TestRMILookup localhost 55555
 
 public class TestRMILookup {
 	

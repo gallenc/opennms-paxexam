@@ -41,49 +41,62 @@ public class Activator implements BundleActivator {
 	private static final String LOGGING_PREFIX = "onms-paxexam";
 
 	private Registry paxexamRmiRegistry = null;
+	private PaxexamRMIServerSocketFactory paxexamRMIServerSocketFactory = null;
 
 	// org.ops4j.pax.exam.rbc.rmi.host= localhost
 	// org.ops4j.pax.exam.rbc.rmi.name= PaxExam
 	// org.ops4j.pax.exam.rbc.rmi.port= 1099
 
 	// same as org.ops4j.pax.exam.rbc.Constants
-	public static final String RMI_PORT_PROPERTY = "org.ops4j.pax.exam.rbc.rmi.port";
-	public static final String RMI_HOST_PROPERTY = "org.ops4j.pax.exam.rbc.rmi.host";
-	public static final String RMI_NAME_PROPERTY = "org.ops4j.pax.exam.rbc.rmi.name";
+	public static final String PAX_RMI_PORT_PROPERTY = "org.ops4j.pax.exam.rbc.rmi.port";
+	public static final String PAX_RMI_HOST_PROPERTY = "org.ops4j.pax.exam.rbc.rmi.host";
+	public static final String PAX_RMI_NAME_PROPERTY = "org.ops4j.pax.exam.rbc.rmi.name";
 
 	public void start(BundleContext context) {
 		// setting up separate logging for paxexam - note probably doesn't work in Activator under felix as using jul logging
 		Map<String, String> originalMDC = MDC.getCopyOfContextMap();
 		MDC.put(PREFIX_KEY, LOGGING_PREFIX);
 
-		String portStr = System.getProperty(RMI_PORT_PROPERTY);
+		String portStr = System.getProperty(PAX_RMI_PORT_PROPERTY);
+		String hostStr = System.getProperty(PAX_RMI_HOST_PROPERTY);
+		String nameStr = System.getProperty(PAX_RMI_NAME_PROPERTY);
 
 		try {
 
 			// TODO MAKE INFO
-			LOG.warn("Starting paxexam test RMI server: RMI_PORT_PROPERTY=" + portStr);
+			LOG.warn("Starting paxexam test RMI server: PAX_RMI_HOST_PROPERTY="+hostStr
+					+ " PAX_RMI_NAME_PROPERTY="+nameStr
+					+ " PAX_RMI_PORT_PROPERTY=" + portStr);
 
 			Integer port = Integer.valueOf(portStr);
+			
+			// paxexamRMIServerSocketFactory = new PaxexamRMIServerSocketFactory(hostStr);
+			paxexamRMIServerSocketFactory = new PaxexamRMIServerSocketFactory("0.0.0.0");
+			
+			
 
-			URL location1 = new URL(
-					"file:/C:/devel/karaf/apache-karaf-4.3.6/paxexamdeps/pax-swissbox-framework-1.8.4.jar");
-			// URL location1 =
-			// RemoteFrameworkImpl.class.getProtectionDomain().getCodeSource().getLocation();
-			URL location2 = Bundle.class.getProtectionDomain().getCodeSource().getLocation();
-
-			// URL location3 =
-			// ServiceLookup.class.getProtectionDomain().getCodeSource().getLocation();
-			URL location3 = new URL(
-					"file:C:/devel/karaf/apache-karaf-4.3.6/paxexamdeps/pax-swissbox-tracker-1.8.4.jar");
-			URL location4 = new URL(
-					"file:C:/devel/karaf/apache-karaf-4.3.6/paxexamdeps/pax-exam-container-rbc-4.13.5.jar");
-
-			String codebase = location1 + " " + location2 + " " + location3 + " " + location4;
-			LOG.warn("setting java.rmi.server.codebase: " + codebase);
-			System.setProperty("java.rmi.server.codebase", codebase);
+			//TODO REMOVE OR FIX LOCATION
+//			URL location1 = new URL(
+//					"file:/C:/devel/karaf/apache-karaf-4.3.6/paxexamdeps/pax-swissbox-framework-1.8.4.jar");
+//			// URL location1 =
+//			// RemoteFrameworkImpl.class.getProtectionDomain().getCodeSource().getLocation();
+//			URL location2 = Bundle.class.getProtectionDomain().getCodeSource().getLocation();
+//
+//			// URL location3 =
+//			// ServiceLookup.class.getProtectionDomain().getCodeSource().getLocation();
+//			URL location3 = new URL(
+//					"file:C:/devel/karaf/apache-karaf-4.3.6/paxexamdeps/pax-swissbox-tracker-1.8.4.jar");
+//			URL location4 = new URL(
+//					"file:C:/devel/karaf/apache-karaf-4.3.6/paxexamdeps/pax-exam-container-rbc-4.13.5.jar");
+//
+//			String codebase = location1 + " " + location2 + " " + location3 + " " + location4;
+//			LOG.warn("setting java.rmi.server.codebase: " + codebase);
+//			System.setProperty("java.rmi.server.codebase", codebase);
 
 			// https://stackoverflow.com/questions/9307764/localhost-only-rmi - creating rmi with fixed ports
-			paxexamRmiRegistry = LocateRegistry.createRegistry(port);
+			//paxexamRmiRegistry = LocateRegistry.createRegistry(port);
+			
+			paxexamRmiRegistry = LocateRegistry.createRegistry(port, paxexamRMIServerSocketFactory, paxexamRMIServerSocketFactory);
 			LOG.warn("new registry Created " + paxexamRmiRegistry);
 
 		} catch (Exception e) {

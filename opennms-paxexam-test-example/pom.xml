@@ -36,6 +36,12 @@
       </dependency>
 
       <dependency>
+         <groupId>org.opennms.integration.paxexam</groupId>
+         <artifactId>opennms-paxexam-rmi-server</artifactId>
+         <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+
+      <dependency>
          <groupId>org.ops4j.pax.exam</groupId>
          <artifactId>pax-exam-junit4</artifactId>
          <version>${pax.exam.version}</version>

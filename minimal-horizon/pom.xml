@@ -73,6 +73,14 @@
                            <overWrite>true</overWrite>
                            <outputDirectory>${project.basedir}/container-fs/opt/opennms-overlay/lib</outputDirectory>
                         </artifactItem>
+                        <artifactItem>
+                           <groupId>org.opennms.integration.paxexam</groupId>
+                           <artifactId>opennms-paxexam-rmi-server</artifactId>
+                           <version>0.0.1-SNAPSHOT</version>
+                           <type>jar</type>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>${project.basedir}/container-fs/opt/opennms-overlay/lib</outputDirectory>
+                        </artifactItem>
                         
                         <!-- misc directory - only for in-container tests -->
                         <artifactItem>
@@ -95,6 +103,14 @@
                            <groupId>org.ops4j.pax.exam</groupId>
                            <artifactId>pax-exam</artifactId>
                            <version>${paxexam.version}</version>
+                           <type>jar</type>
+                           <overWrite>true</overWrite>
+                           <outputDirectory>${project.basedir}/container-fs/misc</outputDirectory>
+                        </artifactItem>
+                        <artifactItem>
+                           <groupId>org.opennms.integration.paxexam</groupId>
+                           <artifactId>opennms-paxexam-rmi-server</artifactId>
+                           <version>0.0.1-SNAPSHOT</version>
                            <type>jar</type>
                            <overWrite>true</overWrite>
                            <outputDirectory>${project.basedir}/container-fs/misc</outputDirectory>

@@ -61,9 +61,6 @@
                   <Export-Package>
                      org.opennms.integrate.paxexam.rmitestserver*;version=${project.version}
                   </Export-Package>
-                  <!-- <Export-Package> -->
-                  <!-- org.opennms.integration.paxexam.rmitestserver*;version=${project.version} -->
-                  <!-- </Export-Package> -->
                   <Import-Package>
                      *
                   </Import-Package>
