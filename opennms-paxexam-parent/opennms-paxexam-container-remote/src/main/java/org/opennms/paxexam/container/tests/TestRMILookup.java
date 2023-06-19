@@ -11,7 +11,10 @@ import java.rmi.registry.Registry;
 import java.util.Arrays;
 import java.util.List;
 
-//  java -cp ./paxexamtest-remote-0.0.1-SNAPSHOT.jar org.opennms.paxexam.container.tests.TestRMILookup horizon 55555
+// java -cp opennms-paxexam-container-remote-0.0.1-SNAPSHOT.jar:pax-exam-container-rbc-onms-4.13.5.jar:pax-exam-4.13.5.jar org.opennms.paxexam.container.tests.TestRMILookup localhost 55555
+// on opennms try
+// java -cp opennms-paxexam-container-remote-0.0.1-SNAPSHOT.jar:pax-exam-container-rbc-onms-4.13.5.jar:pax-exam-4.13.5.jar:../lib/osgi.core-7.0.0.jar org.opennms.paxexam.container.tests.TestRMILookup localhost 55555
+
 public class TestRMILookup {
 	
 	  public static void main(String[] args) {
@@ -50,9 +53,8 @@ public class TestRMILookup {
 			System.out.println("number of registry names:"+regList.length);
 			List<String> registryNames = Arrays.asList(regList);
 			for (String name : registryNames) {
-
-				Object obj = registry.lookup(name);
 				System.out.println("name: " + name);
+				Object obj = registry.lookup(name);
 				if (obj != null)
 					System.out.println("   name: " + name + "\n obj class: " + obj.getClass().getName()
 							+ "\n obj.toString():  " + obj.toString());
