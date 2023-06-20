@@ -30,6 +30,18 @@
    <dependencies>
 
       <dependency>
+         <groupId>org.apache.karaf.features</groupId>
+         <artifactId>org.apache.karaf.features.core</artifactId>
+         <version>${karafVersion}</version>
+      </dependency>
+
+      <dependency>
+         <groupId>org.apache.karaf.shell</groupId>
+         <artifactId>org.apache.karaf.shell.core</artifactId>
+         <version>${karafVersion}</version>
+      </dependency>
+
+      <dependency>
          <groupId>org.opennms.example.paxexam</groupId>
          <artifactId>opennms-paxexam-container-remote</artifactId>
          <version>0.0.1-SNAPSHOT</version>
