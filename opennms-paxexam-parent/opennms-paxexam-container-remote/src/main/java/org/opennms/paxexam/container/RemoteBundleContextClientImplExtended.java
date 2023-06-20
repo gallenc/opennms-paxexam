@@ -142,15 +142,6 @@ public class RemoteBundleContextClientImplExtended implements RemoteBundleContex
 
     @Override
     public void cleanup() {
-    	
-    	//TODO REMOVE WAIT
-    	try {
-    		LOG.info("RBC Client cleanup wait 10000");
-            Thread.sleep(10000);
-        } catch (InterruptedException e) {
-        }
-    	LOG.info("RBC Client end of cleanup wait");
-    	
         try {
             while (!installed.isEmpty()) {
                 Long id = installed.pop();
