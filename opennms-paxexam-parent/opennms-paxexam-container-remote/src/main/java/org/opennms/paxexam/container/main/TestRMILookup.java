@@ -1,4 +1,4 @@
-package org.opennms.paxexam.container.tests;
+package org.opennms.paxexam.container.main;
 
 
 import java.lang.reflect.InvocationHandler;
@@ -12,7 +12,7 @@ import java.util.Arrays;
 import java.util.List;
 
 // to run this test in container
-//java -cp opennms-paxexam-rmi-server-0.0.1-SNAPSHOT.jar:opennms-paxexam-container-remote-0.0.1-SNAPSHOT.jar:pax-exam-container-rbc-onms-4.13.5.jar:pax-exam-4.13.5.jar:org.osgi.core-6.0.0.jar org.opennms.paxexam.container.tests.TestRMILookup localhost 55555
+//java -cp opennms-paxexam-rmi-server-0.0.1-SNAPSHOT.jar:opennms-paxexam-container-remote-0.0.1-SNAPSHOT.jar:pax-exam-container-rbc-onms-4.13.5.jar:pax-exam-4.13.5.jar:org.osgi.core-6.0.0.jar org.opennms.paxexam.container.main.TestRMILookup localhost 55555
 
 public class TestRMILookup {
 	

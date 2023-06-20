@@ -41,8 +41,8 @@ public class RBCRemoteTargetExtended implements TestContainer {
 	private RemoteBundleContextClient remoteBundleContextClient;
 	private Long probeId;
 
-	public RBCRemoteTargetExtended(String name, Integer registry, RelativeTimeout timeout) {
-		remoteBundleContextClient = new RemoteBundleContextClientImplExtended(name, registry, timeout);
+	public RBCRemoteTargetExtended(String name, Integer registry, RelativeTimeout timeout, String hostname) {
+		remoteBundleContextClient = new RemoteBundleContextClientImplExtended(name, registry, timeout, hostname);
 	}
 
 	/**

@@ -50,6 +50,8 @@ public class RemoteBundleContextClientImplExtended implements RemoteBundleContex
     private final Stack<Long> installed;
 
     private final String name;
+    
+    private final String hostname;
 
     /**
      * Constructor.
@@ -62,9 +64,11 @@ public class RemoteBundleContextClientImplExtended implements RemoteBundleContex
      *            timeout for looking up the remote bundle context via RMI (cannot be null)
      */
     public RemoteBundleContextClientImplExtended(final String name, final Integer registry,
-        final RelativeTimeout timeout) {
+        final RelativeTimeout timeout, final String hostname) {
         assert registry != null : "registry should not be null";
+        assert hostname != null : "hostname should not be null";
 
+        this.hostname = hostname;
         this.registry = registry;
         this.name = name;
         rmiLookupTimeout = timeout;
@@ -225,10 +229,10 @@ public class RemoteBundleContextClientImplExtended implements RemoteBundleContex
     private synchronized RemoteBundleContext getRemoteBundleContext() {
         if (remoteBundleContext == null) {
 
-            // !! Absolutely necesary for RMI class loading to work
+            // !! Absolutely necessary for RMI class loading to work
             // TODO maybe use ContextClassLoaderUtils.doWithClassLoader
             Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
-            LOG.info("Waiting for remote bundle context.. on " + registry + " name: " + name
+            LOG.info("Waiting for remote bundle context.. on hostname "+hostname +" registry " + registry + " name: " + name
                 + " timout: " + rmiLookupTimeout);
             // TODO create registry here
             Throwable reason = null;
@@ -236,7 +240,7 @@ public class RemoteBundleContextClientImplExtended implements RemoteBundleContex
 
             do {
                 try {
-                    remoteBundleContext = (RemoteBundleContext) getRegistry(registry).lookup(name);
+                    remoteBundleContext = (RemoteBundleContext) getRegistry(registry, hostname).lookup(name);
                 }
                 catch (RemoteException e) {
                     reason = e;
@@ -261,9 +265,9 @@ public class RemoteBundleContextClientImplExtended implements RemoteBundleContex
     // TODO This utility is copy/pasted in pax-exam-container-forked's
     // ForkedFrameworkFactory, and ideally perhaps should be be put into a
     // shared utility module
-    private Registry getRegistry(int port) throws RemoteException {
+    private Registry getRegistry(int port, String hostName) throws RemoteException {
         Registry reg;
-        String hostName = System.getProperty("java.rmi.server.hostname");
+        //String hostName = System.getProperty("java.rmi.server.hostname");
         if (hostName != null && !hostName.isEmpty()) {
             reg = LocateRegistry.getRegistry(hostName, port);
         }
