@@ -1,4 +1,4 @@
-package org.opennms.example.paxexam.paxexamtest;
+package org.opennms.integration.example.paxexamtest;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;

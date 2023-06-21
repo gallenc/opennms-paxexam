@@ -267,7 +267,7 @@ public class RemoteBundleContextClientImplExtended implements RemoteBundleContex
     // shared utility module
     private Registry getRegistry(int port, String hostName) throws RemoteException {
         Registry reg;
-        //String hostName = System.getProperty("java.rmi.server.hostname");
+
         if (hostName != null && !hostName.isEmpty()) {
             reg = LocateRegistry.getRegistry(hostName, port);
         }

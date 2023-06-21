@@ -79,14 +79,15 @@ public class RemoteBundleContextImpl implements RemoteBundleContext, Serializabl
 	}
 
 	Object getService(final Class<?> serviceType, final String methodName, final RelativeTimeout timeout, String filter) {
-		// TODO REMOVE THIS WORKS - looking for services
+
 		Object service = null;
 		ServiceTracker tracker = null;
 
+		// this is additional code which finds the service even if original service lookup fails
 		try {
 			service = ServiceLookup.getService(bundleContext, serviceType, timeout.getValue(), filter);
 		} catch (Exception ex) {
-			LOG.debug("standard ServiceLookup failed using filter:" + filter + " now trying alternative direct lookup", ex);
+			LOG.debug("standard ServiceLookup failed ("+ex.getMessage()	+ ") using filter:" + filter + " now trying alternative direct lookup");
 		}
 
 		if (service == null)
@@ -108,9 +109,9 @@ public class RemoteBundleContextImpl implements RemoteBundleContext, Serializabl
 				ServiceReference[] serviceReferences = tracker.getServiceReferences();
 				msg = msg + "RBC internal finding services";
 				if (serviceReferences == null) {
-					msg = msg + " no services found by tracker - waiting for new services filter: " + filter;
+					msg = msg + " no services found by tracker - waiting for new services using filter: " + filter+"\n";
 				} else {
-					msg = msg + "found " + serviceReferences.length + " service references:\n";
+					msg = msg + " found " + serviceReferences.length + " service references:\n";
 					for (ServiceReference ref : serviceReferences) {
 						msg = msg + "  ref:  " + ref.toString() + "\n";
 						for (String propkey : ref.getPropertyKeys()) {
@@ -150,19 +151,7 @@ public class RemoteBundleContextImpl implements RemoteBundleContext, Serializabl
 		Object service = null;
 
 		service = getService(serviceType, methodName, timeout, filter);
-		// TODO THIS FAILS
-
-		// try {
-		// RelativeTimeout t = new RelativeTimeout (1000);
-		// //service = ServiceLookup.getService(bundleContext, serviceType,
-		// timeout.getValue(), filter);
-		// service = ServiceLookup.getService(bundleContext, serviceType, t.getValue(),
-		// filter);
-		// } catch (Exception ex) {
-		// LOG.error("Remote Bundle Context service lookup exception filter:" + filter,
-		// ex);
-		// throw ex;
-		// }
+		
 		Object obj = null;
 		try {
 			obj = serviceType.getMethod(methodName, methodParams).invoke(service, actualParams);
@@ -170,7 +159,6 @@ public class RemoteBundleContextImpl implements RemoteBundleContext, Serializabl
 			if (t.getTargetException().getCause() instanceof RerunTestException) {
 				LOG.debug("rerun the test");
 				service = getService(serviceType, methodName, timeout, filter);
-				// service = ServiceLookup.getService(bundleContext, serviceType, timeout.getValue(), filter);
 				obj = serviceType.getMethod(methodName, methodParams).invoke(service, actualParams);
 			} else {
 				throw t;

@@ -57,9 +57,9 @@
                <instructions>
                   <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
                   <Bundle-Version>${project.version}</Bundle-Version>
-                  <Bundle-Activator>org.opennms.integrate.paxexam.rmitestserver.Activator</Bundle-Activator>
+                  <Bundle-Activator>org.opennms.integration.paxexam.rmitestserver.Activator</Bundle-Activator>
                   <Export-Package>
-                     org.opennms.integrate.paxexam.rmitestserver*;version=${project.version}
+                     org.opennms.integration.paxexam.rmitestserver*;version=${project.version}
                   </Export-Package>
                   <Import-Package>
                      *

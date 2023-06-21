@@ -1,4 +1,4 @@
-package org.opennms.integrate.paxexam.rmitestserver;
+package org.opennms.integration.paxexam.rmitestserver;
 
 import java.io.IOException;
 import java.io.Serializable;

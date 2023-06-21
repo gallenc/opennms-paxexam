@@ -26,7 +26,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.concurrent.Callable;
 
-import org.opennms.integrate.paxexam.rmitestserver.PaxexamRMIServerSocketFactory;
+import org.opennms.integration.paxexam.rmitestserver.PaxexamRMIServerSocketFactory;
 import org.ops4j.pax.exam.rbc.Constants;
 import org.ops4j.pax.swissbox.core.ContextClassLoaderUtils;
 import org.osgi.framework.BundleActivator;
@@ -72,9 +72,7 @@ public class Activator implements BundleActivator {
         String name = getName();
         Integer port = getPort();
         
-        //TODO CHANGE
-        System.out.println("******************************* starting pax-exam-container-rbc-onms");
-    	LOG.error("starting pax-exam-container-rbc-onms host="+host+ "  name="+name+ " port="+port);
+    	LOG.warn("starting pax-exam-container-rbc-onms host="+host+ "  name="+name+ " port="+port);
     	
         if (host == null || port == null || name == null) {
             LOG.warn("Name, port or host is null. So this RBC remains inactive.");
@@ -160,8 +158,8 @@ public class Activator implements BundleActivator {
 
     @Override
     public synchronized void stop(BundleContext bundleContext) throws Exception {
-    	//TODO
-    	LOG.error("stopping pax-exam-container-rbc-onms ");
+
+    	LOG.warn("stopping pax-exam-container-rbc-onms ");
     	
         if (registerRBCThread != null) {
             registerRBCThread.interrupt();

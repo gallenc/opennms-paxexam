@@ -59,10 +59,7 @@ public class TestRMILookup {
 							+ "\n obj.toString():  " + obj.toString());
 			}
 
-
-
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

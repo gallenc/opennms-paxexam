@@ -14,7 +14,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.opennms.integrate.paxexam.rmitestserver;
+package org.opennms.integration.paxexam.rmitestserver;
 
 import java.rmi.NoSuchObjectException;
 import java.rmi.NotBoundException;
@@ -71,30 +71,8 @@ public class Activator implements BundleActivator {
 			Integer port = Integer.valueOf(portStr);
 			
 			// paxexamRMIServerSocketFactory = new PaxexamRMIServerSocketFactory(hostStr);
+			// setting 0.0.0.0 allows loopback
 			paxexamRMIServerSocketFactory = new PaxexamRMIServerSocketFactory("0.0.0.0");
-			
-			
-
-			//TODO REMOVE OR FIX LOCATION
-//			URL location1 = new URL(
-//					"file:/C:/devel/karaf/apache-karaf-4.3.6/paxexamdeps/pax-swissbox-framework-1.8.4.jar");
-//			// URL location1 =
-//			// RemoteFrameworkImpl.class.getProtectionDomain().getCodeSource().getLocation();
-//			URL location2 = Bundle.class.getProtectionDomain().getCodeSource().getLocation();
-//
-//			// URL location3 =
-//			// ServiceLookup.class.getProtectionDomain().getCodeSource().getLocation();
-//			URL location3 = new URL(
-//					"file:C:/devel/karaf/apache-karaf-4.3.6/paxexamdeps/pax-swissbox-tracker-1.8.4.jar");
-//			URL location4 = new URL(
-//					"file:C:/devel/karaf/apache-karaf-4.3.6/paxexamdeps/pax-exam-container-rbc-4.13.5.jar");
-//
-//			String codebase = location1 + " " + location2 + " " + location3 + " " + location4;
-//			LOG.warn("setting java.rmi.server.codebase: " + codebase);
-//			System.setProperty("java.rmi.server.codebase", codebase);
-
-			// https://stackoverflow.com/questions/9307764/localhost-only-rmi - creating rmi with fixed ports
-			//paxexamRmiRegistry = LocateRegistry.createRegistry(port);
 			
 			paxexamRmiRegistry = LocateRegistry.createRegistry(port, paxexamRMIServerSocketFactory, paxexamRMIServerSocketFactory);
 			LOG.warn("new registry Created " + paxexamRmiRegistry);

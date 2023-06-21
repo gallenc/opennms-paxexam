@@ -1,4 +1,4 @@
-package org.opennms.example.paxexam.paxexamtest;
+package org.opennms.integration.example.paxexamtest;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -19,8 +19,9 @@ public class CommandTest extends TestBase {
 
 	@Test
 	public void testProvisioning() throws Exception {
-		LOG.error("***************** TRYING TO RUN THE TEST");
-		LOG.error(executeCommand("bundle:list"));
+		LOG.warn("***************** TRYING TO RUN BUNDLE LIST COMMAND TEST");
+		LOG.warn(executeCommand("bundle:list"));
+		LOG.warn("***************** END OF BUNDLE LIST COMMAND TEST");
 
 	}
 
