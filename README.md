@@ -10,7 +10,7 @@ It can be used for generic  projects based on Karaf and for more specific develo
 
 To run some test examples see
 
-[Running Examples](../main/docs/DesignDetails.md)
+[Running Examples](../main/docs/RunningExamples.md)
 
 ## Overview
 [Pax-Exam](https://ops4j1.jira.com/wiki/spaces/PAXEXAM4/overview) is a fantastic test framework which supports in-container testing.
@@ -63,7 +63,21 @@ To run some test examples see
 
 [Running Examples](../main/docs/RunningExamples.md)
 
-## Credits and Licencing
+## Credits and Licensing
 
+This project is licensed under Apache 2 licence.
 
+Much of the extension work has built upon the excellent Pax-Exam project.
+Apache licence (Copyright 2008 written by Toni Menzel and others).
+
+In addition some test examples from the [Karaf-Cassandra](https://github.com/ANierbeck/Karaf-Cassandra) project have also been adapted. 
+Apache licence (Copyright 2015 Achim Nierbeck)
+
+### Note: OpenNMS licensing
+OpenNMS is licensed under the AGPL v3 licence. 
+Any code linking to or extending OpenNMS code should be similarly licensed. 
+
+For this reason, the OpenNMS example in this project does not use any of the core OpenNMS api's but only generic Karaf commands.
+ 
+A separate project will be provided to show example test cases which link directly to the OpenNMS api.
 
