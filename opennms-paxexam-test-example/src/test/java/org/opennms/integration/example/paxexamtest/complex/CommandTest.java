@@ -1,4 +1,4 @@
-package org.opennms.integration.example.paxexamtest;
+package org.opennms.integration.example.paxexamtest.complex;
 
 import static org.junit.Assert.*;
 import org.junit.Before;

@@ -17,7 +17,7 @@
  *
  */
 
-package org.opennms.integration.example.paxexamtest;
+package org.opennms.integration.example.paxexamtest.complex;
 
 import static org.opennms.paxexam.container.OpenNMSRBCRemoteTargetOptions.location;
 import static org.opennms.paxexam.container.OpenNMSRBCRemoteTargetOptions.waitForRBCFor;
