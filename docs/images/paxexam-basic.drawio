@@ -1,0 +1,55 @@
+<mxfile host="Electron" modified="2023-06-22T10:13:54.634Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.5.0 Chrome/112.0.5615.204 Electron/24.5.1 Safari/537.36" etag="pkRZ-UJwbQdorcK-sd6U" version="21.5.0" type="device">
+  <diagram name="Page-1" id="bndg_6HbLod__y72PkgO">
+    <mxGraphModel dx="2603" dy="844" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1169" pageHeight="827" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="aeQDbrRqsy_HbuM61XPv-1" value="PaxExam Test Project (Maven)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;verticalAlign=bottom;fontSize=14;" vertex="1" parent="1">
+          <mxGeometry x="-500" y="170" width="1200" height="540" as="geometry" />
+        </mxCell>
+        <mxCell id="MLsOv2MgDcYOWqf87Pbu-75" value="PaxExam Test Container" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;verticalAlign=bottom;fontSize=14;strokeColor=#6c8ebf;" parent="1" vertex="1">
+          <mxGeometry x="140" y="199" width="460" height="431" as="geometry" />
+        </mxCell>
+        <mxCell id="MLsOv2MgDcYOWqf87Pbu-74" value="Karaf Distribution" style="rounded=1;whiteSpace=wrap;html=1;verticalAlign=bottom;fontSize=13;" parent="1" vertex="1">
+          <mxGeometry x="160" y="218" width="400" height="360" as="geometry" />
+        </mxCell>
+        <mxCell id="MLsOv2MgDcYOWqf87Pbu-58" value="jvm" style="html=1;overflow=block;blockSpacing=1;whiteSpace=wrap;shape=image;fontSize=13;spacing=0;strokeColor=none;strokeOpacity=100;shadow=1;strokeWidth=0;image=https://images.lucid.app/images/475a5584-ef64-4faa-8aa0-dd0fcc450fbd/content;imageAspect=0;lucidId=~Qw5hDSRshFr;fontFamily=Open Sans;" parent="1" vertex="1">
+          <mxGeometry x="200" y="458" width="320" height="42" as="geometry" />
+        </mxCell>
+        <mxCell id="MLsOv2MgDcYOWqf87Pbu-59" value="OSGI" style="html=1;overflow=block;blockSpacing=1;whiteSpace=wrap;shape=image;fontSize=13;spacing=0;strokeColor=none;strokeOpacity=100;shadow=1;strokeWidth=0;image=https://images.lucid.app/images/475a5584-ef64-4faa-8aa0-dd0fcc450fbd/content;imageAspect=0;lucidId=~Qw5hDSRshFr;fontFamily=Open Sans;" parent="1" vertex="1">
+          <mxGeometry x="200" y="407" width="320" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MLsOv2MgDcYOWqf87Pbu-60" value="lib" style="html=1;overflow=block;blockSpacing=1;whiteSpace=wrap;shape=image;fontSize=13;spacing=0;strokeColor=none;strokeOpacity=100;shadow=1;strokeWidth=0;image=https://images.lucid.app/images/475a5584-ef64-4faa-8aa0-dd0fcc450fbd/content;imageAspect=0;lucidId=~Qw5hDSRshFr;fontFamily=Open Sans;" parent="1" vertex="1">
+          <mxGeometry x="340" y="509" width="79.5" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MLsOv2MgDcYOWqf87Pbu-61" value="etc" style="html=1;overflow=block;blockSpacing=1;whiteSpace=wrap;shape=image;fontSize=13;spacing=0;strokeColor=none;strokeOpacity=100;shadow=1;strokeWidth=0;image=https://images.lucid.app/images/475a5584-ef64-4faa-8aa0-dd0fcc450fbd/content;imageAspect=0;lucidId=~Qw5hDSRshFr;fontFamily=Open Sans;" parent="1" vertex="1">
+          <mxGeometry x="204" y="509" width="126" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MLsOv2MgDcYOWqf87Pbu-63" value="system (.m2)" style="html=1;overflow=block;blockSpacing=1;whiteSpace=wrap;shape=image;fontSize=13;spacing=0;strokeColor=none;strokeOpacity=100;shadow=1;strokeWidth=0;image=https://images.lucid.app/images/475a5584-ef64-4faa-8aa0-dd0fcc450fbd/content;imageAspect=0;lucidId=~Qw5hDSRshFr;fontFamily=Open Sans;" parent="1" vertex="1">
+          <mxGeometry x="430" y="509" width="90" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MLsOv2MgDcYOWqf87Pbu-64" value="Remote Bundle Context Bundle" style="html=1;overflow=block;blockSpacing=1;whiteSpace=wrap;shape=image;fontSize=13;spacing=0;strokeColor=none;strokeOpacity=100;shadow=1;strokeWidth=0;image=https://images.lucid.app/images/475a5584-ef64-4faa-8aa0-dd0fcc450fbd/content;imageAspect=0;lucidId=~Qw5hDSRshFr;fontFamily=Open Sans;rotation=-91;imageBackground=#78A0FF;" parent="1" vertex="1">
+          <mxGeometry x="260" y="294" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MLsOv2MgDcYOWqf87Pbu-67" value="&lt;br&gt;deploy&lt;br&gt;" style="html=1;overflow=block;blockSpacing=1;whiteSpace=wrap;shape=image;fontSize=13;spacing=0;strokeColor=none;strokeOpacity=100;shadow=1;strokeWidth=0;image=https://images.lucid.app/images/475a5584-ef64-4faa-8aa0-dd0fcc450fbd/content;imageAspect=0;lucidId=~Qw5hDSRshFr;fontFamily=Open Sans;verticalAlign=bottom;" parent="1" vertex="1">
+          <mxGeometry x="353" y="239" width="110" height="150" as="geometry" />
+        </mxCell>
+        <mxCell id="MLsOv2MgDcYOWqf87Pbu-68" value="system bundle n" style="html=1;overflow=block;blockSpacing=1;whiteSpace=wrap;shape=image;fontSize=13;spacing=0;strokeColor=none;strokeOpacity=100;shadow=1;strokeWidth=0;image=https://images.lucid.app/images/475a5584-ef64-4faa-8aa0-dd0fcc450fbd/content;imageAspect=0;lucidId=~Qw5hDSRshFr;fontFamily=Open Sans;rotation=-91;" parent="1" vertex="1">
+          <mxGeometry x="430" y="294" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="MLsOv2MgDcYOWqf87Pbu-90" value="RMI" style="html=1;overflow=block;blockSpacing=1;whiteSpace=wrap;shape=image;fontSize=13;spacing=0;strokeColor=none;strokeOpacity=100;shadow=1;strokeWidth=0;image=https://images.lucid.app/images/475a5584-ef64-4faa-8aa0-dd0fcc450fbd/content;imageAspect=0;lucidId=~Qw5hDSRshFr;fontFamily=Open Sans;" parent="1" vertex="1">
+          <mxGeometry x="265" y="468" width="45" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="MLsOv2MgDcYOWqf87Pbu-92" value="Paxexam test probe" style="html=1;overflow=block;blockSpacing=1;whiteSpace=wrap;shape=image;fontSize=13;spacing=0;strokeColor=none;strokeOpacity=100;shadow=1;strokeWidth=0;image=https://images.lucid.app/images/475a5584-ef64-4faa-8aa0-dd0fcc450fbd/content;imageAspect=0;lucidId=~Qw5hDSRshFr;fontFamily=Open Sans;rotation=-91;imageBackground=#FF85B6;" parent="1" vertex="1">
+          <mxGeometry x="160" y="294" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="aeQDbrRqsy_HbuM61XPv-3" value="ExampleKarafTest.java&lt;br&gt;&lt;br&gt;@RunWith(PaxExam.class)&lt;br&gt;@ExamReactorStrategy(PerClass.class)&lt;br&gt;public class ExampleWithConfigITest extends KarafTestSupport {&lt;br&gt;&lt;br&gt;&lt;br&gt;&amp;nbsp; &amp;nbsp; @Configuration&lt;br&gt;&amp;nbsp; &amp;nbsp; public Option[] config() {&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; Option[] options = new Option[]{&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;&amp;nbsp; &amp;nbsp;&amp;nbsp;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; KarafDistributionOption.editConfigurationFilePut(&quot;etc/system.properties&quot;,&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &quot;my.system.property&quot;, System.getProperty(&quot;my.system.property&quot;))&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; };&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;return Stream.of(super.config(),&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; options).flatMap(Stream::of).toArray(Option[]::new);&lt;br&gt;&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp;}&lt;br&gt;&lt;br&gt;&lt;br&gt;&amp;nbsp; &amp;nbsp; @Test&lt;br&gt;&amp;nbsp; &amp;nbsp; public void simpleTest() throws Exception {&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; System.out.println(&quot;==== System Property in probe bundle: &quot; +&amp;nbsp; &lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; System.getProperty(&quot;my.system.property&quot;));&lt;br&gt;&amp;nbsp; &amp;nbsp; &amp;nbsp; &amp;nbsp; assertContains(&quot;foo&quot;, System.getProperty(&quot;my.system.property&quot;));&lt;br&gt;&amp;nbsp; &amp;nbsp; }&lt;br&gt;&lt;br&gt;}" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;labelBorderColor=default;" vertex="1" parent="1">
+          <mxGeometry x="-490" y="226" width="440" height="404" as="geometry" />
+        </mxCell>
+        <mxCell id="aeQDbrRqsy_HbuM61XPv-7" value="test actions:&lt;br&gt;1. downloads and unpacks karaf&lt;br&gt;2. adds configuration&lt;br&gt;3. starts karaf&lt;br&gt;4. injects test runner (remote bundle context)&lt;br&gt;5. runs each test as an injected probe" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="-50" y="328" width="181" height="140" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
