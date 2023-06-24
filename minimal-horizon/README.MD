@@ -144,19 +144,21 @@ name: PaxExam
 
 ## Running the horizon docker-compose test environment
 
-First build the main pax-exam project and then run maven in this project to install the dependencies.
-See [Running Examples](../docs/RunningExamples.md")
+First build the main pax-exam project (See [Running Examples](../docs/RunningExamples.md")) and then run maven in this project to install the dependencies.
 
 ```
+cd minimal-horizon 
 mvn clean install
 docker-compose up -d
 ```
+On first boot this will take quite a long time for horizon to install the database and get going. 
+Subsequent runs will take less time. 
+Note that the intention is that the test environment is left running and external tests controll what is running in OpenNMS.
 
 To see the horizon logs as opennms starts up use
 ```
 docker-compose  logs -f horizon
 ```
-
 To get into the horizon container and view the karaf logs use
 
 ```
@@ -183,10 +185,14 @@ or to clear all data in the containers
 docker-compose  down -v
 
 ```
+to see opennms UI IPV6
 
-to see opennms UI
+http://[::1]:8980/opennms/
+(username admin password admin)
 
-http://[::1]:8980/opennms/   username admin password admin
-or
+or IPV4
+
 http://localhost:8980/opennms/
+
+
 
