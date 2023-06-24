@@ -30,7 +30,7 @@ The motivation for this project is to make it considerably easier to create and 
 
 Karaf is used as a run-time container within the core OpenNMS and also within distributed [Minion](https://docs.opennms.com/horizon/30/deployment/minion/introduction.html) and [Sentinel](https://docs.opennms.com/horizon/30/deployment/sentinel/introduction.html) modules. 
 
-OpenNMS does makes some limited use of Pax-Exam within it's development test api and when when testing some karaf modules. 
+OpenNMS does makes some limited use of Pax-Exam within it's development test api and when testing some karaf modules. 
 See for instance [KarafTestCase.java](https://github.com/OpenNMS/opennms/blob/develop/core/test-api/karaf/src/main/java/org/opennms/core/test/karaf/KarafTestCase.java).
 However this is a complex internal use of Pax-exam which requires Pax-exam to run its Karaf test container in-test. 
 It does not provide an easy to use example for external plugin development or testing.
@@ -50,7 +50,7 @@ Ultimately this provides for more realistic and easier to configure integration 
 In summary the design goals for this project are to create a test framework which :
 
 1. Runs a full pre-built OpenNMS release instance with all dependencies within a docker-compose project on docker desktop - ideally supporting configurations based on the [opennms-forge stackplay](https://github.com/opennms-forge/stack-play) docker-compose examples.
-2. Allows any local configurations are applied through the opennms docker overlay mechanism
+2. Allows any local configurations to be applied through the opennms docker overlay mechanism
 3. Provides simple to configure examples of how to set up OpenNMS (or karaf) to work with the external pax-exam project.
 4. Injects karaf commands and Junit tests using RMI from an external test project.
 
@@ -65,7 +65,7 @@ To run some test examples see
 
 ## Credits and Licensing
 
-This project is licensed under Apache 2 licence.
+This project is licensed under the Apache 2 licence.
 
 Much of the extension work has built upon the excellent Pax-Exam project.
 Apache licence (Copyright 2008 written by Toni Menzel and others).
@@ -77,7 +77,7 @@ Apache licence (Copyright 2015 Achim Nierbeck)
 OpenNMS is licensed under the AGPL v3 licence. 
 Any code linking to or extending OpenNMS code should be similarly licensed. 
 
-For this reason, the OpenNMS example in this project does not use any of the core OpenNMS api's but only generic Karaf commands.
+For this reason, the OpenNMS example in this project does NOT use any of the core OpenNMS api's but only generic Karaf commands.
  
 A separate project will be provided to show example test cases which link directly to the OpenNMS api.
 
