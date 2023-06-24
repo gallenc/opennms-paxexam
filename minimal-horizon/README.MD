@@ -15,7 +15,7 @@ In the docker-compose file, we add
       - ./container-fs/opt/opennms-overlay:/opt/opennms-overlay
 ```
 The configuration files added are listed below
-![alt text](../main/docs/images/injectedFilesOpenNMS.jpg "Figure injectedFilesOpenNMS.jpg")
+![alt text](../docs/images/injectedFilesOpenNMS.jpg "Figure injectedFilesOpenNMS.jpg")
 
 
 ### OpenNMS deploy
