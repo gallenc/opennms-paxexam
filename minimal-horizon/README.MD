@@ -15,15 +15,62 @@ In the docker-compose file, we add
       - ./container-fs/opt/opennms-overlay:/opt/opennms-overlay
 ```
 The configuration files added are listed below
+
 ![alt text](../docs/images/injectedFilesOpenNMS.jpg "Figure injectedFilesOpenNMS.jpg")
 
+![etc/opennms.properties.d/paxexam.properties](../minimal-horizon/container-fs/opt/opennms-overlay/etc/opennms.properties.d/paxexam.properties)
+
+```
+org.ops4j.pax.exam.rbc.rmi.host= horizon
+org.ops4j.pax.exam.rbc.rmi.name= PaxExam
+org.ops4j.pax.exam.rbc.rmi.port= 55555
+pax.exam.service.timeout=20000
+
+pax.exam.invoker=junit
+org.ops4j.pax.exam.raw.extender.intern.Parser.DEFAULT_TIMEOUT=60000
+
+```
+These properties tell the paxexam container which host and port it is running on. 
+You can have more than one container running pax-exam if you ensure the host and port names are different. 
+Note that if you change the port from 55555, you must also change the exposed port in docker-compose.
+
+![etc/opennms.properties.d/paxexam.properties](../minimal-horizon/container-fs/opt/opennms-overlay/etc/opennms.properties.d/security.properties)
+This file may not be needed but is included here as an example of how the java security can be opened up to allow external RMI.
+
+Logging
+Change the logging overlay files to suit your test logging needs.
+Some reasonable defaults provided.
+
+![etc/log4j2.xml](../minimal-horizon/container-fs/opt/opennms-overlay/etc/log4j2.xml)
+
+The pax logging config has been changed so that karaf commands are listed properly and lone feeds are not escaped
+
+![etc/org.ops4j.pax.logging.cfg](../minimal-horizon/container-fs/opt/opennms-overlay/etc/org.ops4j.pax.logging.cfg)
+
+```
+# Common pattern layout for appenders
+#log4j2.pattern = %d{ISO8601} | %-5p | %-16t | %-32c{1} | %X{bundle.id} - %X{bundle.name} - %X{bundle.version} | %encode{%.-500m}{CRLF}%n
+
+# changed encoding so that we can print out commands and not escape \n characters in logs - note this may be security risk.
+log4j2.pattern = %d{ISO8601} | %-5p | %-16t | %-32c{1} | %X{bundle.id} - %X{bundle.name} - %X{bundle.version} | %m%n
+
+```
 
 ### OpenNMS deploy
+Any jar or feature.xml included here will be used to load bundles into OpenNMS. 
+
+A feature file is provided (pax-exam-features-opennms-4.13.5.xml) to start up the RMI server and the RemoteBundleContext which runs the tests. 
+This feature file is required to set up the pax-exam system within the running OpenNMS.
+
+A developer could overlay their own feature file or jars in deploy to run up their own plugin.
+ 
+However the preferred method would be to have a test run a karaf command to install the feature from the user's .m2 repository.
+
 In the docker-compose file, we add 
 
 ```
   volumes:
-      - ./container-fs/opt/opennms-overlay:/opt/opennms-overlay
+      - ./container-fs/opt/opennms/deploy:/opt/opennms/deploy
 ```
 
 ### injecting the maven .m2 repository
@@ -95,46 +142,51 @@ name: PaxExam
  obj.toString():  Proxy[RemoteBundleContext,RemoteObjectInvocationHandler[UnicastRef2 [liveRef: [endpoint:[localhost:55555,org.opennms.integration.paxexam.rmitestserver.PaxexamRMIServerSocketFactory@4cdbe50f](remote),objID:[392b447d:188ec5621b2:-7ff5, 1607189668500639864]]]]]
 ```
 
+## Running the horizon docker-compose test environment
 
-
-
-
-You can then start and stop opennms in this project.
-(You should have docker installed on your host).
+First build the main pax-exam project and then run maven in this project to install the dependencies.
+See [Running Examples](../docs/RunningExamples.md")
 
 ```
-docker-compose    up -d
+mvn clean install
+docker-compose up -d
+```
 
-## to see the logs use
+To see the horizon logs as opennms starts up use
+```
 docker-compose  logs -f horizon
+```
 
-## to shut down use
+To get into the horizon container and view the karaf logs use
+
+```
+docker-compose exec horizon bash
+
+opennms@horizon  tail -f logs/karaf.log
+```
+
+To get into the horizon container and access the karaf shell using ssh use
+
+```
+docker-compose exec horizon bash
+
+ssh admin@horizon -p 8101  -o StrictHostKeyChecking=no
+(password: admin)
+
+```
+to shut down use
+```
 docker-compose  down
 
-to see opennms
+or to clear all data in the containers
+
+docker-compose  down -v
+
+```
+
+to see opennms UI
 
 http://[::1]:8980/opennms/   username admin password admin
 or
 http://localhost:8980/opennms/
-
-
-
-```
-
-## to view OpenNMS logs as opennms starts up use
-
-```
- docker-compose --profile roadfaultapi logs -f horizon
-```
-
-## to open a terminal in the running opennms container use
-
-```
-docker-compose --profile roadfaultapi exec horizon bash
-```
-
-## to ssh to karaf in opennms use
-```
-ssh admin@horizon -p 8101  -o StrictHostKeyChecking=no
-```
 
