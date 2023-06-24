@@ -8,7 +8,7 @@
 Pax-Exam test runner for in-application testing of bundles, kar modules and services for applications based on OSGi including Karaf and OpenNMS. 
 It can be used for generic  projects based on Karaf and for more specific development and testing with OpenNMS.
 
-To run some test examples see
+TL;DR To run some test examples see
 
 [Running Examples](../main/docs/RunningExamples.md)
 
