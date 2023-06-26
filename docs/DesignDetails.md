@@ -41,9 +41,21 @@ In theory, the OpenNMS documentation, [configuring RMI](https://docs.opennms.com
 For this reason, a separate RMI server bundle ( [opennms-paxexam-rmi-server](../opennms-paxexam/opennms-paxexam-parent\opennms-paxexam-rmi-server) ) has been created to be installed within the karaf container which runs on a specified port and accepts connections from any address.
 This port is used both for the RMI registry for pax-exam and also for the RMI remote test calls.
 
-### Remote Bundle Context (pax-exam-container-rbc-onms)
+Note also that for RMI to work, the stubb classes need to be on the class path as RMI does not know anything about maven. So for thsi reason, we need to copy some jars directly into the lib directory.
 
+### Remote Bundle Context (pax-exam-container-rbc-onms)
+The [pax-exam-container-rbc-onms](../opennms-paxexam/opennms-paxexam-parent\pax-exam-container-rbc-onms) is the service which runs in karaf and listens for pax-exam commands and loads junit tests onto the karaf container. 
+When this bundle starts up it registers itswlf as PaxExam with the RMI Registry and listens on the same port for the paxexam system to make requests. 
 
 ### Remote Container (opennms-paxexam-container-remote)
 
+The paxexam system needs a pax-exam container to start up the tests. 
+This container simply proxys for the pax-exam-container-rbc-onms running in karaf.
+We tell paxexam tests to use this container by annotating it in a class
+
+```
+@RunWith(PaxExam.class)
+@ExamFactory(org.opennms.paxexam.container.OpenNMSPluginTestContainerFactory.class)
+
+```
 
