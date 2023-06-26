@@ -13,7 +13,7 @@ It then starts the container.
 
 Once karaf has started, pax-exam injects a 'Test Probe' bundle using RMI. 
 The test probe contains the junit tests which are to be run within the OSGi container. 
-The test can be annotated with services or the bundle contxt, and these will be wired from services running in the container before the test is run.
+The test can be annotated with services or the bundle context, and these will be wired from services running in the container before the test is run.
 
 After the test has finished, the test probe is uninstalled and the karaf container is stopped unless it is specified to keep running between tests. 
 
@@ -24,6 +24,19 @@ In this case, we would like to have the full application running with it's norma
 ## Injected Pax-exam usage with stand alone OpenNMS or Karaf
 
 The figure below illustrates how integration testing can be done against a running OpenNMS or stand alone Karaf.
+
+Karaf runs embedded in OpenNMS and actually runs within the jetty web app so that it has access to the same underlying services exposed to the web application. 
+The underlying services provided by the OpenNMS daemons are exposed as OSGi services so that plugins can interact with the underlying system.
+
+We drop a feature.xml file into the deploy directory which causes OpenNMS to load the required pax-exam bundles from the shared user/.m2 repo. 
+
+In order for RMI to work it is also necessary to place some of these jars in the /lib directory so they are available on the class path for RMI.
+
+Developers could also drop .kar files or feature.xml files into the deploy directory to spin up the required developer features. 
+However it probably will be better practice to install these developer artifacts using karaf commands embedded in the junit tests.
+
+The actual tests are packed in a bundle and deployed using RMI. 
+
 
 ![alt text](../docs/images/paxexam-opennms.jpg "Figure paxexam-opennms.jpg")
 
