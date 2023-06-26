@@ -32,7 +32,7 @@ docker-compose up -d
 Note that horizon will take a while to start - particularly if this is the first time you have run the container and the database needs built. 
 
 
-## running the tests
+## Running the tests
 
 Once the test environment has started, you can run the test example.
 You can run this as a surefire test within the maven build
@@ -89,7 +89,7 @@ public class MyTest {
 
 }
 ```
-### test Configuration
+### Test Configuration
 
 The pax-exam system is initiated within a junit test through the annotation 
 
