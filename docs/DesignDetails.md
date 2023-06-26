@@ -50,8 +50,9 @@ When this bundle starts up it registers itswlf as PaxExam with the RMI Registry 
 ### Remote Container (opennms-paxexam-container-remote)
 
 The paxexam system needs a pax-exam container to start up the tests. 
-This container simply proxys for the pax-exam-container-rbc-onms running in karaf.
-We tell paxexam tests to use this container by annotating it in a class
+This [opennms-paxexam-container-remote](../opennms-paxexam/opennms-paxexam-parent/opennms-paxexam-container-remotes) simply proxys for the pax-exam-container-rbc-onms running in karaf.
+
+We tell paxexam tests to use this container by annotating it in a the test class.
 
 ```
 @RunWith(PaxExam.class)
