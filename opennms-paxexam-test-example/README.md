@@ -128,18 +128,19 @@ No other container provisioning annotations are supported as the configuration o
 
 ## Karaf command test
 
-A more complex test example is [CommandTest.java](../opennms-paxexam-test-example/src/test/java/org/opennms/integration/example/paxexamtest/complex/CommandTest.java) which extends a base test class  [BaseTest.java](../opennms-paxexam-test-example/src/test/java/org/opennms/integration/example/paxexamtest/complex/BaseTest.java)
+A more complex test example is [CommandTest.java](../opennms-paxexam-test-example/src/test/java/org/opennms/integration/example/paxexamtest/complex/CommandTest.java) which extends a base test class  [TestBase.java](../opennms-paxexam-test-example/src/test/java/org/opennms/integration/example/paxexamtest/complex/TestBase.java)
 
-( The idea for the base test was provided by Achim Nierbeck in his [karaf-cassandra project TestBase.java]( https://github.com/ANierbeck/Karaf-Cassandra/blob/master/Karaf-Cassandra-ITest/src/test/java/de/nierbeck/cassandra/itest/TestBase.java) )
+( The idea for the base test was provided by Achim Nierbeck in his [karaf-cassandra project TestBase.java]( https://github.com/ANierbeck/Karaf-Cassandra/blob/master/Karaf-Cassandra-ITest/src/test/java/de/nierbeck/cassandra/itest/TestBase.java) If you look at the tests in that project you will get some good ideas of what can be done here.)
 
-This illustrates how services are injected into the paxexam test class and how karaf commands can be executed within the test.
-In this example
+[CommandTest.java](../opennms-paxexam-test-example/src/test/java/org/opennms/integration/example/paxexamtest/complex/CommandTest.java) illustrates how services running in karf can be injected into the paxexam test class and how karaf commands can be executed within the test.
+In this example,
 
 ```
 executeCommand("bundle:list")
 ```
 
-Lists all of the bundles running in the container. 
+lists all of the bundles running in the container. 
+The string output from the command is logged. (Note this is why CRLF filtering is turned off in the log configuration)
 
 However, any karaf command which could be run from the terminal can be run as part of the test. 
 This opens the possibility for running a command to start and stop a feature injected using the .m2 repository before and after the tests are run.
