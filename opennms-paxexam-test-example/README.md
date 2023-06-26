@@ -1,4 +1,4 @@
-# paxexamtest
+# opennms-paxexam-test-example
 
 This is an example test project which will work with either a simple karaf installation or OpenNMS. 
 It does not uses any OpenNMS specific API's.
