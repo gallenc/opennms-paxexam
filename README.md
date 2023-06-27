@@ -16,6 +16,8 @@ For a brief video tutorial see:
 
 [OpenNMS Pax-exam demonstration video](https://youtu.be/e6OQfn-xnxg)
 
+[![alt text](../main/docs/images/paxexam-vid.jpg)](https://youtu.be/e6OQfn-xnxg)
+
 ## Overview
 [Pax-Exam](https://ops4j1.jira.com/wiki/spaces/PAXEXAM4/overview) is a fantastic test framework which supports in-container testing.
  
