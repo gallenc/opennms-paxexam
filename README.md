@@ -8,9 +8,13 @@
 Pax-Exam test runner for in-application testing of bundles, kar modules and services for applications based on OSGi including Karaf and OpenNMS. 
 It can be used for generic  projects based on Karaf and for more specific development and testing with OpenNMS.
 
-TL;DR To run some test examples see
+TL;DR To run some test examples see:
 
 [Running Examples](../main/docs/RunningExamples.md)
+
+For a brief video tutorial see:
+
+[OpenNMS Pax-exam demonstration video](https://youtu.be/e6OQfn-xnxg)
 
 ## Overview
 [Pax-Exam](https://ops4j1.jira.com/wiki/spaces/PAXEXAM4/overview) is a fantastic test framework which supports in-container testing.
