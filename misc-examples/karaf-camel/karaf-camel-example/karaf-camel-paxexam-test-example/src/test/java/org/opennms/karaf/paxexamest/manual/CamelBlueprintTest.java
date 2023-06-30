@@ -46,10 +46,12 @@ public class CamelBlueprintTest extends TestBase {
 
 	   
 		LOG.warn("***************** INSTALLING CAMEL BLUEPRINT REPOSITORY");
-		LOG.warn(executeCommand("feature:repo-add mvn:org.opennms.karaf.examples/karaf-camel-example-features/LATEST/xml"));
+		LOG.warn(executeCommand("feature:repo-add mvn:org.opennms.karaf.examples/karaf-camel-example-features/0.0.1-SNAPSHOT/xml"));
 
 		LOG.warn("***************** INSTALLING CAMEL BLUEPRINT FEATURE");
-		LOG.warn(executeCommand("feature:install karaf-camel-example-blueprint"));
+		//LOG.warn(executeCommand("feature:install karaf-camel-example-blueprint"));
+		
+		LOG.warn(executeCommand("feature:install karaf-camel-example-java"));
 
 		
 		LOG.warn("***************** FINISHED INSTALLING CAMEL BLUEPRINT FEATURE");
