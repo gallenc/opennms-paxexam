@@ -36,12 +36,27 @@ public class CamelBlueprintTest extends TestBase {
 
 	@Test
 	public void testProvisioning() throws Exception {
+		LOG.warn("***************** TRYING TO INSTALL AND TEST CAMEL BLUEPRINT FEATURE");
+		
+//		<dependency>
+//	      <groupId>org.opennms.karaf.examples</groupId>
+//	      <artifactId>karaf-camel-example-features</artifactId>
+//	      <version>0.0.1-SNAPSHOT</version>
+//	      </dependency>
+
+	   
+		LOG.warn("***************** INSTALLING CAMEL BLUEPRINT REPOSITORY");
+		LOG.warn(executeCommand("feature:repo-add mvn:org.opennms.karaf.examples/karaf-camel-example-features/LATEST/xml"));
+
+		LOG.warn("***************** INSTALLING CAMEL BLUEPRINT FEATURE");
+		LOG.warn(executeCommand("feature:install karaf-camel-example-blueprint"));
+
+		
+		LOG.warn("***************** FINISHED INSTALLING CAMEL BLUEPRINT FEATURE");
+		
+		
+		
 		LOG.warn("***************** TRYING TO RUN BUNDLE LIST COMMAND TEST");
-		
-//		LOG.warn(executeCommand("feature:repo-add mvn:org.apache.karaf.examples/karaf-camel-example-features/LATEST/xml"));
-		
-		
-		
 		LOG.warn(executeCommand("bundle:list"));
 		LOG.warn("***************** END OF BUNDLE LIST COMMAND TEST");
 

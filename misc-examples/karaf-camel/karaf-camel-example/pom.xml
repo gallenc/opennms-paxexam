@@ -12,13 +12,14 @@
 
    <groupId>org.opennms.karaf.examples</groupId>
    <artifactId>karaf-camel-example</artifactId>
+   <version>0.0.1-SNAPSHOT</version>
    <packaging>pom</packaging>
    <name>Apache Karaf OpenNMS :: Examples :: Camel</name>
-   <version>0.0.1-SNAPSHOT</version>
 
    <properties>
       <karafVersion>4.3.6</karafVersion> <!-- same opennms 31 -->
-
+      <felix.maven-bundle-plugin.version>5.1.4</felix.maven-bundle-plugin.version>
+      <camel.version>3.6.0</camel.version>
    </properties>
 
    <modules>
@@ -40,5 +41,263 @@
          </dependency>
       </dependencies>
    </dependencyManagement>
+
+
+   <build>
+
+      <!-- plugin management taken from https://github.com/apache/karaf/blob/karaf-4.4.3/pom.xml -->
+      <pluginManagement>
+         <plugins>
+            <plugin>
+               <groupId>org.apache.felix</groupId>
+               <artifactId>maven-bundle-plugin</artifactId>
+               <version>${felix.maven-bundle-plugin.version}</version>
+               <inherited>true</inherited>
+               <extensions>true</extensions>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-compiler-plugin</artifactId>
+               <version>3.8.1</version>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-deploy-plugin</artifactId>
+               <version>2.8.2</version>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-enforcer-plugin</artifactId>
+               <version>3.0.0-M2</version>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-gpg-plugin</artifactId>
+               <version>1.6</version>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-javadoc-plugin</artifactId>
+               <version>3.2.0</version>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-jar-plugin</artifactId>
+               <version>3.2.0</version>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-remote-resources-plugin</artifactId>
+               <version>1.7.0</version>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-install-plugin</artifactId>
+               <version>3.0.0-M1</version>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-eclipse-plugin</artifactId>
+               <version>2.10</version>
+               <configuration>
+                  <outputDirectory>${basedir}/eclipse-classes</outputDirectory>
+                  <downloadSources>true</downloadSources>
+                  <downloadJavadocs>true</downloadJavadocs>
+               </configuration>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-release-plugin</artifactId>
+               <version>2.5.3</version>
+               <configuration>
+                  <useReleaseProfile>false</useReleaseProfile>
+                  <preparationGoals>clean install</preparationGoals>
+                  <goals>deploy</goals>
+                  <arguments>-Prelease,deploy,src</arguments>
+                  <autoVersionSubmodules>true</autoVersionSubmodules>
+               </configuration>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-idea-plugin</artifactId>
+               <version>2.2.1</version>
+               <configuration>
+                  <downloadSources>true</downloadSources>
+                  <downloadJavadocs>true</downloadJavadocs>
+               </configuration>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-surefire-plugin</artifactId>
+               <version>2.22.2</version>
+               <configuration>
+                  <forkMode>once</forkMode>
+                  <argLine>${surefire.argLine}</argLine>
+               </configuration>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-resources-plugin</artifactId>
+               <version>3.1.0</version>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.servicemix.tooling</groupId>
+               <artifactId>depends-maven-plugin</artifactId>
+               <version>${plugin.depends.version}</version>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-source-plugin</artifactId>
+               <version>3.2.1</version>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-assembly-plugin</artifactId>
+               <version>3.2.0</version>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-antrun-plugin</artifactId>
+               <version>3.0.0</version>
+               <dependencies>
+                  <dependency>
+                     <groupId>ant-contrib</groupId>
+                     <artifactId>ant-contrib</artifactId>
+                     <version>1.0b3</version>
+                     <exclusions>
+                        <exclusion>
+                           <groupId>ant</groupId>
+                           <artifactId>ant</artifactId>
+                        </exclusion>
+                     </exclusions>
+                  </dependency>
+                  <dependency>
+                     <groupId>org.apache.ant</groupId>
+                     <artifactId>ant-nodeps</artifactId>
+                     <version>1.8.1</version>
+                  </dependency>
+                  <dependency>
+                     <groupId>ant</groupId>
+                     <artifactId>ant-optional</artifactId>
+                     <version>1.5.3-1</version>
+                  </dependency>
+                  <dependency>
+                     <groupId>org.ccil.cowan.tagsoup</groupId>
+                     <artifactId>tagsoup</artifactId>
+                     <version>1.2.1</version>
+                  </dependency>
+               </dependencies>
+            </plugin>
+            <plugin>
+               <groupId>org.codehaus.mojo</groupId>
+               <artifactId>exec-maven-plugin</artifactId>
+               <version>1.6.0</version>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-dependency-plugin</artifactId>
+               <version>3.1.2</version>
+            </plugin>
+            <plugin>
+               <groupId>org.codehaus.mojo</groupId>
+               <artifactId>build-helper-maven-plugin</artifactId>
+               <version>3.1.0</version>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-site-plugin</artifactId>
+               <version>3.9.0</version>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.maven.plugins</groupId>
+               <artifactId>maven-war-plugin</artifactId>
+               <version>3.2.3</version>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.karaf.tooling</groupId>
+               <artifactId>karaf-maven-plugin</artifactId>
+               <version>${karafVersion}</version>
+            </plugin>
+            <plugin>
+               <groupId>org.eclipse.m2e</groupId>
+               <artifactId>lifecycle-mapping</artifactId>
+               <version>1.0.0</version>
+               <configuration>
+                  <lifecycleMappingMetadata>
+                     <pluginExecutions>
+                        <pluginExecution>
+                           <pluginExecutionFilter>
+                              <groupId>org.apache.felix</groupId>
+                              <artifactId>maven-bundle-plugin</artifactId>
+                              <versionRange>[0,)</versionRange>
+                              <goals>
+                                 <goal>cleanVersions</goal>
+                              </goals>
+                           </pluginExecutionFilter>
+                           <action>
+                              <ignore />
+                           </action>
+                        </pluginExecution>
+                        <pluginExecution>
+                           <pluginExecutionFilter>
+                              <groupId>org.apache.maven.plugins</groupId>
+                              <artifactId>maven-dependency-plugin</artifactId>
+                              <versionRange>[0,)</versionRange>
+                              <goals>
+                                 <goal>copy</goal>
+                                 <goal>unpack</goal>
+                              </goals>
+                           </pluginExecutionFilter>
+                           <action>
+                              <ignore />
+                           </action>
+                        </pluginExecution>
+                        <pluginExecution>
+                           <pluginExecutionFilter>
+                              <groupId>org.apache.karaf.tooling</groupId>
+                              <artifactId>karaf-maven-plugin</artifactId>
+                              <versionRange>[0,)</versionRange>
+                              <goals>
+                                 <goal>commands-generate-help</goal>
+                              </goals>
+                           </pluginExecutionFilter>
+                           <action>
+                              <ignore />
+                           </action>
+                        </pluginExecution>
+                        <pluginExecution>
+                           <pluginExecutionFilter>
+                              <groupId>org.fusesource.scalate</groupId>
+                              <artifactId>maven-scalate-plugin</artifactId>
+                              <versionRange>[0,)</versionRange>
+                              <goals>
+                                 <goal>sitegen</goal>
+                              </goals>
+                           </pluginExecutionFilter>
+                           <action>
+                              <ignore />
+                           </action>
+                        </pluginExecution>
+                     </pluginExecutions>
+                  </lifecycleMappingMetadata>
+               </configuration>
+            </plugin>
+            <plugin>
+               <groupId>org.apache.karaf.tooling</groupId>
+               <artifactId>karaf-services-maven-plugin</artifactId>
+               <version>${karafVersion}</version>
+               <executions>
+                  <execution>
+                     <id>service-metadata-generate</id>
+                     <phase>process-classes</phase>
+                     <goals>
+                        <goal>service-metadata-generate</goal>
+                     </goals>
+                  </execution>
+               </executions>
+            </plugin>
+         </plugins>
+      </pluginManagement>
+   </build>
 
 </project>

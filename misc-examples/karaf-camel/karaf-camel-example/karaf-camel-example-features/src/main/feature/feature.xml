@@ -26,7 +26,7 @@
         <feature>camel-jetty</feature>
         <feature>camel-jsonpath</feature>
         <feature>camel-mail</feature>
-        <bundle>mvn:org.apache.karaf.examples/karaf-camel-example-java/${project.version}</bundle>
+        <bundle>mvn:org.opennms.karaf.examples/karaf-camel-example-java/${project.version}</bundle>
     </feature>
 
     <feature name="karaf-camel-example-blueprint" version="${project.version}">
@@ -38,7 +38,7 @@
         <capability>
             osgi.service;objectClass=org.apache.aries.blueprint.NamespaceHandler;osgi.service.blueprint.namespace=http://camel.apache.org/schema/blueprint;effective:=active;
         </capability>
-        <bundle>blueprint:mvn:org.apache.karaf.examples/karaf-camel-example-blueprint/${project.version}/xml/route</bundle>
+        <bundle>blueprint:mvn:org.opennms.karaf.examples/karaf-camel-example-blueprint/${project.version}/xml/route</bundle>
     </feature>
 
 </features>
