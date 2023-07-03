@@ -17,9 +17,13 @@
    <name>Apache Karaf OpenNMS :: Examples :: Camel</name>
 
    <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+
       <karafVersion>4.3.6</karafVersion> <!-- same opennms 31 -->
       <felix.maven-bundle-plugin.version>5.1.4</felix.maven-bundle-plugin.version>
       <camel.version>3.6.0</camel.version>
+      
    </properties>
 
    <modules>

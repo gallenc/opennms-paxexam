@@ -31,32 +31,25 @@ import org.slf4j.LoggerFactory;
 
 @RunWith(PaxExam.class)
 @ExamFactory(org.opennms.paxexam.container.OpenNMSPluginTestContainerFactory.class)
-public class CamelBlueprintTest extends TestBase {
-	private static Logger LOG = LoggerFactory.getLogger(CamelBlueprintTest.class);
+public class CamelJavaTest extends TestBase {
+	private static Logger LOG = LoggerFactory.getLogger(CamelJavaTest.class);
 
 	@Test
 	public void testProvisioning() throws Exception {
-		LOG.warn("***************** TRYING TO INSTALL AND TEST CAMEL BLUEPRINT FEATURE");
+		LOG.warn("***************** TRYING TO INSTALL AND TEST CAMEL JAVA FEATURE");
 		
-//		<dependency>
-//	      <groupId>org.opennms.karaf.examples</groupId>
-//	      <artifactId>karaf-camel-example-features</artifactId>
-//	      <version>0.0.1-SNAPSHOT</version>
-//	      </dependency>
-
 	   
-		LOG.warn("***************** INSTALLING CAMEL BLUEPRINT REPOSITORY");
+		LOG.warn("***************** INSTALLING CAMEL JAVA REPOSITORY");
 		LOG.warn(executeCommand("feature:repo-add mvn:org.opennms.karaf.examples/karaf-camel-example-features/0.0.1-SNAPSHOT/xml"));
 
-		LOG.warn("***************** INSTALLING CAMEL BLUEPRINT FEATURE");
+		LOG.warn("***************** INSTALLING CAMEL JAVA FEATURE");
+		//LOG.warn(executeCommand("feature:install karaf-camel-example-blueprint"));
+		
+		LOG.warn(executeCommand("feature:install karaf-camel-example-java"));
 
-        LOG.warn(executeCommand("feature:install karaf-camel-example-blueprint"));
-		
-		//LOG.warn(executeCommand("feature:install karaf-camel-example-java"));
-
 		
 		
-		LOG.warn("***************** FINISHED INSTALLING CAMEL BLUEPRINT FEATURE");
+		LOG.warn("***************** FINISHED INSTALLING CAMEL JAVA FEATURE");
 		
 		
 		

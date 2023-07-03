@@ -64,6 +64,7 @@ services:
       - "10162:1162/udp"
       - "55555:55555/tcp" # pax exam rmi port
       - "1098:1098/tcp" # java.rmi.activation.port rmi server port - for pax exam
+      - "9090:9090/tcp" # ONLY used for camel examples
     healthcheck:
       test: [ "CMD", "curl", "-f", "-I", "http://localhost:8980/opennms/login.jsp" ]
       interval: 1m
