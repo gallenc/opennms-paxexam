@@ -54,6 +54,7 @@ public class CamelBlueprintTest extends TestBase {
 		LOG.warn(executeCommand("feature:install karaf-camel-example-java"));
 
 		
+		
 		LOG.warn("***************** FINISHED INSTALLING CAMEL BLUEPRINT FEATURE");
 		
 		

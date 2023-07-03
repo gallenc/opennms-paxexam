@@ -29,6 +29,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.security.PrivilegedActionException;
+import java.security.PrivilegedExceptionAction;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
@@ -41,9 +43,11 @@ import java.util.concurrent.FutureTask;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+import javax.security.auth.Subject;
 
 import org.apache.karaf.features.BootFinished;
 import org.apache.karaf.features.FeaturesService;
+import org.apache.karaf.jaas.boot.principal.RolePrincipal;
 import org.apache.karaf.shell.api.console.Session;
 import org.apache.karaf.shell.api.console.SessionFactory;
 import org.junit.After;
@@ -103,12 +107,6 @@ public class TestBase {
     
     @Before
     public void setUpITestBase() throws Exception {
-//        int count = 0;
-//        while (!cassandraService.isRunning() && count < 10) {
-//            Thread.sleep(500);
-//        }
-//        logger.info("Waited for Cassandra service to appear: " + Integer.toString(count * 500));
-
         session = sessionFactory.create(System.in, printStream, errStream);
     }
 
@@ -118,7 +116,8 @@ public class TestBase {
         byteArrayOutputStream.reset();
 
         String response;
-        FutureTask<String> commandFuture = new FutureTask<String>(new Callable<String>() {
+        
+        final Callable<String> commandCallable = new Callable<String> () {
             public String call() {
                 try {
                     System.err.println(command);
@@ -129,6 +128,33 @@ public class TestBase {
                 printStream.flush();
                 errStream.flush();
                 return byteArrayOutputStream.toString();
+            }
+        };
+        
+        // see https://vzurczak.wordpress.com/tag/pax-exam/ Executing Karaf Commands in PAX-Exam Tests
+        // this solves problem of bundle:install not found
+        // commands such as "bundle:install" require some privileges.
+        // So, we must enclose our invocation in a privileged action.
+        FutureTask<String> commandFuture = new FutureTask<String>( new Callable<String>() {
+            @Override
+            public String call() {
+ 
+                // using admin privileges
+                Subject subject = new Subject();
+                subject.getPrincipals().addAll( Arrays.asList( new RolePrincipal( "admin" )));
+                try {
+                    return Subject.doAs( subject, new PrivilegedExceptionAction<String> () {
+                        @Override
+                        public String run() throws Exception {
+                            return commandCallable.call();
+                        }
+                    });
+ 
+                } catch( PrivilegedActionException e ) {
+                    e.printStackTrace( System.err );
+                }
+ 
+                return null;
             }
         });
 
@@ -144,6 +170,8 @@ public class TestBase {
 
         return response;
     }
+    
+    
 
     @SuppressWarnings({ "rawtypes", "unchecked" })
     protected <T> T getOsgiService(Class<T> type, String filter, long timeout) {
