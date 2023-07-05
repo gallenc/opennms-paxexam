@@ -1,18 +1,7 @@
- missing in OpenNMS camel
- 
- org.apache.camel:camel-jsonpath:jar:2.19.1: [Could not find artifact org.apache.camel:camel-jsonpath:jar:2.19.1]
- 
- com.fasterxml.jackson.core:jackson-annotations:jar:2.8.8
- com.fasterxml.jackson.core:jackson-core:jar:2.8.8
- com.fasterxml.jackson.core:jackson-databind:jar:2.8.8
- com.google.code.gson:gson:jar:2.7
- 
- com.jayway.jsonpath:json-path:jar:2.1.0
- 
-  com.fasterxml.jackson.core:jackson-core:jar:2.8.8
-  
-  com.jayway.jsonpath:json-path:jar:2.1.0
-  
-  com.fasterxml.jackson.core:jackson-databind:jar:2.8.8:
-  
-  com.google.code.gson:gson:jar:2.7
+problems with karaf maven plugin
+
+cant resolve https://repo.maven.apache.org/maven2/org/ops4j/pax/cdi/pax-cdi-features/%5B1,2)/pax-cdi-features-[1,2)-features.xml
+
+https://issues.apache.org/jira/browse/KARAF-5999   features-add-to-repository doesn't support feature inner repository with range
+
+https://issues.apache.org/jira/browse/KARAF-7428  karaf-maven-plugin and version ranges

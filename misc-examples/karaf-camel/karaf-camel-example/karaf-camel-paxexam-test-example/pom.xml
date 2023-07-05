@@ -83,6 +83,7 @@
             <groupId>org.apache.karaf.tooling</groupId>
             <artifactId>karaf-maven-plugin</artifactId>
             <version>${karafVersion}</version>
+<!--          <version>4.4.3</version> -->
             <executions>
                <!-- this execution works fine in standard maven build but shows an error in eclipse -->
                <execution>
@@ -93,6 +94,7 @@
                   </goals>
                   <configuration>
                      <descriptors>
+                        <repository>mvn:org.apache.karaf.features/standard/${karafVersion}/xml/features</repository>
                         <descriptor>mvn:org.opennms.karaf.examples/karaf-camel-example-features/${project.version}/xml</descriptor>
                      </descriptors>
                      <features>

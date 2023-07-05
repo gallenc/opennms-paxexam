@@ -1,0 +1,1 @@
+repackaging of apache-camel-3.21.0 features
