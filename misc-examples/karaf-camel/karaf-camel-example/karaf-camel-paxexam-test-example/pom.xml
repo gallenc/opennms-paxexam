@@ -83,7 +83,7 @@
             <groupId>org.apache.karaf.tooling</groupId>
             <artifactId>karaf-maven-plugin</artifactId>
             <version>${karafVersion}</version>
-<!--          <version>4.4.3</version> -->
+            <!-- <version>4.4.3</version> -->
             <executions>
                <!-- this execution works fine in standard maven build but shows an error in eclipse -->
                <execution>
@@ -221,6 +221,13 @@
          <artifactId>slf4j-api</artifactId>
          <version>${slf4j.version}</version>
          <scope>provided</scope>
+      </dependency>
+
+      <dependency>
+         <groupId>org.apache.httpcomponents</groupId>
+         <artifactId>httpclient-osgi</artifactId>
+         <version>4.5.14</version> <!-- same as OpenNMS lib -->
+         <scope>test</scope>
       </dependency>
 
    </dependencies>

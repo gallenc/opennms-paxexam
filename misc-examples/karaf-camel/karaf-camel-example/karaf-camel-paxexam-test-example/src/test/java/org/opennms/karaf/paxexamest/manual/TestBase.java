@@ -105,6 +105,13 @@ public class TestBase {
     private PrintStream errStream = new PrintStream(byteArrayOutputStream);
     private Session session;
     
+    /**
+     * This sets up the session factory to allow commands to be run.
+     * Note Junit: The @Before methods of superclasses will be run before those of the 
+     * current class. No other ordering is defined. This only applies if each method 
+     * marked with @Before has a unique name in the class hierarchy.
+     * @throws Exception
+     */
     @Before
     public void setUpITestBase() throws Exception {
         session = sessionFactory.create(System.in, printStream, errStream);
@@ -131,8 +138,8 @@ public class TestBase {
             }
         };
         
-        // see https://vzurczak.wordpress.com/tag/pax-exam/ Executing Karaf Commands in PAX-Exam Tests
-        // this solves problem of bundle:install not found
+        // See https://vzurczak.wordpress.com/tag/pax-exam/ Executing Karaf Commands in PAX-Exam Tests
+        // This solves problem of bundle:install not found
         // commands such as "bundle:install" require some privileges.
         // So, we must enclose our invocation in a privileged action.
         FutureTask<String> commandFuture = new FutureTask<String>( new Callable<String>() {

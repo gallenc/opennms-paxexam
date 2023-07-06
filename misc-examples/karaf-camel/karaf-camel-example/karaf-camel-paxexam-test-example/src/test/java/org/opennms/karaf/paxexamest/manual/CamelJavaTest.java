@@ -18,10 +18,11 @@
 package org.opennms.karaf.paxexamest.manual;
 
 import static org.junit.Assert.*;
-import org.junit.Before;
 import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.opennms.karaf.httpclient.manual.HttpClientTests;
 import org.ops4j.pax.exam.ExamFactory;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.slf4j.Logger;
@@ -41,11 +42,10 @@ public class CamelJavaTest extends TestBase {
 	
 	//public String TEST_FEATURE_NAME = "karaf-camel-example-blueprint";
 
-	@Test
+	@Before
 	public void testProvisioning() throws Exception {
 		LOG.warn("***************** TRYING TO INSTALL AND TEST "+TEST_FEATURE_NAME);
 		
-	   
 		LOG.warn("***************** INSTALLING REPO "+TEST_FEATURE_REPO);
 		LOG.warn(executeCommand("feature:repo-add "+TEST_FEATURE_REPO));
 
@@ -55,14 +55,38 @@ public class CamelJavaTest extends TestBase {
 
 		LOG.warn("***************** FINISHED INSTALLING FEATURE "+TEST_FEATURE_NAME);
 		
-		LOG.warn("***************** TRYING TO RUN BUNDLE LIST COMMAND TEST");
-		//LOG.warn(executeCommand("bundle:list"));
-		LOG.warn("***************** END OF BUNDLE LIST COMMAND TEST");
+		// this is needed because simple karaf container does not have these bundles by default
+		// (opennms does have httpclient)
+		
+		LOG.warn("***************** INSTALLING HTTPCLIENT FOR TESTS");
+		
+		LOG.warn(executeCommand("bundle:install mvn:org.apache.httpcomponents/httpcore-osgi/4.4.16"));
+		
+		LOG.warn(executeCommand("bundle:install mvn:org.apache.httpcomponents/httpclient-osgi/4.5.14"));
+
+		LOG.warn("***************** FINISHED INSTALLING HTTPCLIENT FOR TESTS");
+
+	}
+	
+	@Test
+	public void testHttpClient() throws Exception{
+		
+		LOG.warn("***************** TRYING TO RUN HTTPCLIENT TESTS");
+		HttpClientTests test = new HttpClientTests();
+		
+		LOG.warn("***************** ERROR TEST");
+		test.testErrorGet();
+		LOG.warn("***************** POST NOTIFICATION TEST");
+		test.testPostNotification();
+		LOG.warn("***************** POST HTTP TEST");
+		test.testPostHttp();
+		
+		LOG.warn("***************** END OF HTTPCLIENT TESTS");
 
 	}
 
 	
-	@After
+//	@After
 	public void removeFeature() throws Exception{
 		
 		LOG.warn("***************** STATUS TEST FEATURE "+TEST_FEATURE_NAME);
