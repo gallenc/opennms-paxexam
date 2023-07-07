@@ -28,7 +28,7 @@ apt-get install openssh-client
 docker-compose - exec karaf1 bash
 ```
 
-## to ssh to karaf in opennms use
+## to ssh to karaf from another container use
 ```
 ssh karaf@karaf1 -p 8101  -o StrictHostKeyChecking=no
 (password karaf)

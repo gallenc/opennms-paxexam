@@ -26,6 +26,10 @@ import org.apache.http.impl.client.HttpClients;
  * 
  * 		feature:repo-add mvn:org.opennms.karaf.examples/karaf-camel-example-features/0.0.1-SNAPSHOT/xml
  *      feature:install karaf-camel-example-blueprint
+ *      
+ *      # this is needed because a simple karaf container does not have these bundles by default. (opennms does have httpclient)
+ *      bundle:install mvn:org.apache.httpcomponents/httpcore-osgi/4.4.16
+ *      bundle:install mvn:org.apache.httpcomponents/httpclient-osgi/4.5.14
  * 
  * The tests here replicate the curl tests in the feature documentation.
  * 

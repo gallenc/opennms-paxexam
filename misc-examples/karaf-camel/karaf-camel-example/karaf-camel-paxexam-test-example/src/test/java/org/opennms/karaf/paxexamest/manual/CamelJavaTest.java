@@ -55,7 +55,7 @@ public class CamelJavaTest extends TestBase {
 
 		LOG.warn("***************** FINISHED INSTALLING FEATURE "+TEST_FEATURE_NAME);
 		
-		// this is needed because simple karaf container does not have these bundles by default
+		// this is needed because a simple karaf container does not have these bundles by default
 		// (opennms does have httpclient)
 		
 		LOG.warn("***************** INSTALLING HTTPCLIENT FOR TESTS");
@@ -86,7 +86,7 @@ public class CamelJavaTest extends TestBase {
 	}
 
 	
-//	@After
+	@After
 	public void removeFeature() throws Exception{
 		
 		LOG.warn("***************** STATUS TEST FEATURE "+TEST_FEATURE_NAME);
