@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+   <modelVersion>4.0.0</modelVersion>
+
+   <parent>
+      <groupId>org.opennms.karaf.examples</groupId>
+      <artifactId>karaf-camel-example</artifactId>
+      <version>0.0.1-SNAPSHOT</version>
+   </parent>
+
+   <artifactId>karaf-camel-kar</artifactId>
+
+   <packaging>pom</packaging>
+
+   <properties>
+      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+      <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+      <java.version>8</java.version>
+
+      <opennms-paxexam.version>0.0.1-SNAPSHOT</opennms-paxexam.version>
+
+      <karafVersion>4.3.6</karafVersion> <!-- same opennms 31 -->
+      <felix.framework.version>6.0.5</felix.framework.version> <!-- same as karaf opennms -->
+
+      <dependency.osgicomp.version>4.3.1</dependency.osgicomp.version>
+
+      <pax.exam.karaf.version>4.3.6</pax.exam.karaf.version>
+      <dependency.atinject.version>1.0</dependency.atinject.version>
+
+
+      <pax.exam.version>4.13.5</pax.exam.version>
+      <pax.url.version>2.1.0</pax.url.version>
+      <logback.version>1.0.4</logback.version>
+      <slf4j.version>1.7.4</slf4j.version>
+      <log4j.version>2.11.1</log4j.version>
+      <pax.logging.version>2.0.14</pax.logging.version> <!-- same as OpenNMS -->
+      <dependency.swissbox.version>1.8.4</dependency.swissbox.version>
+
+
+      <maven.surefire.plugin.version>2.18</maven.surefire.plugin.version>
+   </properties>
+
+   <build>
+
+
+      <plugins>
+
+         <!-- This plugin simply makes sure that the feature's required bundles are downloaded into the local /m2 repo for use in resolving in karaf container -->
+         <plugin>
+            <groupId>org.apache.karaf.tooling</groupId>
+            <artifactId>karaf-maven-plugin</artifactId>
+            <version>${karafVersion}</version>
+            <extensions>true</extensions>
+
+            <executions>
+               <!-- this execution works fine in standard maven build but shows an error in eclipse -->
+               <execution>
+                  <id>features-add-to-repo</id>
+                  <phase>generate-resources</phase>
+                  <goals>
+                     <goal>features-add-to-repository</goal>
+                  </goals>
+                  <configuration>
+                     <descriptors>
+                        <repository>mvn:org.apache.karaf.features/standard/${karafVersion}/xml/features</repository>
+                        <descriptor>mvn:org.opennms.karaf.examples/karaf-camel-example-features/${project.version}/xml</descriptor>
+                     </descriptors>
+                     <features>
+                        <feature>karaf-camel-example-java</feature>
+                        <feature>karaf-camel-example-blueprint</feature>
+                     </features>
+                     <repository>target/repository</repository>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+
+         <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <version>3.6.0</version>
+            <executions>
+               <execution>
+                  <id>make-assembly</id> <!-- this is used for inheritance merges -->
+                  <phase>generate-resources</phase> <!-- bind to the packaging phase -->
+                  <goals>
+                     <goal>single</goal>
+                  </goals>
+                  <configuration>
+                     <descriptors>
+                        <descriptor>src/assembly/kar.xml</descriptor>
+                     </descriptors>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+
+         <plugin>
+            <groupId>com.coderplus.maven.plugins</groupId>
+            <artifactId>copy-rename-maven-plugin</artifactId>
+            <version>1.0</version>
+            <executions>
+               <execution>
+                  <id>copy-file</id>
+                  <phase>process-resources</phase>
+                  <goals>
+                     <goal>copy</goal>
+                  </goals>
+                  <configuration>
+                     <sourceFile>target/${artifactId}-${version}-kar.zip</sourceFile>
+                     <destinationFile>target/${artifactId}-${version}.kar</destinationFile>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+
+         <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>build-helper-maven-plugin</artifactId>
+            <version>1.7</version>
+            <executions>
+               <execution>
+                  <id>attach-artifacts</id>
+                  <phase>package</phase>
+                  <goals>
+                     <goal>attach-artifact</goal>
+                  </goals>
+                  <configuration>
+                     <artifacts>
+                        <artifact>
+                           <file>target/${artifactId}-${version}.kar</file>
+                           <type>kar</type>
+                        </artifact>
+                     </artifacts>
+                  </configuration>
+               </execution>
+            </executions>
+         </plugin>
+
+         <plugin>
+            <groupId>org.eclipse.m2e</groupId>
+            <artifactId>lifecycle-mapping</artifactId>
+            <configuration>
+               <lifecycleMappingMetadata>
+                  <pluginExecutions>
+                     <pluginExecution>
+                        <pluginExecutionFilter>
+                           <groupId>org.apache.karaf.tooling</groupId>
+                           <artifactId>karaf-maven-plugin</artifactId>
+                           <versionRange>[0,)</versionRange>
+                           <goals>
+                              <goal>commands-generate-help</goal>
+                              <goal>features-add-to-repository</goal>
+                           </goals>
+                        </pluginExecutionFilter>
+                        <action>
+                           <ignore />
+                        </action>
+                     </pluginExecution>
+                  </pluginExecutions>
+               </lifecycleMappingMetadata>
+            </configuration>
+         </plugin>
+
+      </plugins>
+   </build>
+
+</project>
