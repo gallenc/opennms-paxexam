@@ -32,7 +32,7 @@
       <module>karaf-camel-example-java</module>
       <module>karaf-camel-example-blueprint</module>
       <module>karaf-camel-example-features</module>
-      <module>karaf-camel-kar</module>
+      <module>karaf-camel-example-kar</module>
       <module>karaf-camel-paxexam-test-example</module>
    </modules>
 

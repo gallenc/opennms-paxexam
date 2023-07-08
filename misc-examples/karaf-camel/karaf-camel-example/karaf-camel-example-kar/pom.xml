@@ -9,7 +9,7 @@
       <version>0.0.1-SNAPSHOT</version>
    </parent>
 
-   <artifactId>karaf-camel-kar</artifactId>
+   <artifactId>karaf-camel-example-kar</artifactId>
 
    <packaging>pom</packaging>
 
@@ -46,15 +46,16 @@
 
       <plugins>
 
-         <!-- This plugin simply makes sure that the feature's required bundles are downloaded into the local /m2 repo for use in resolving in karaf container -->
+         <!-- This plugin create a repository for a kar file which contains all of the dependencies for the project -->
+         <!-- It also makes sure that the feature's required bundles are downloaded into the local /m2 repo if that is -->
+         <!-- injected into the karaf container -->
+
          <plugin>
             <groupId>org.apache.karaf.tooling</groupId>
             <artifactId>karaf-maven-plugin</artifactId>
-            <version>${karafVersion}</version>
             <extensions>true</extensions>
 
             <executions>
-               <!-- this execution works fine in standard maven build but shows an error in eclipse -->
                <execution>
                   <id>features-add-to-repo</id>
                   <phase>generate-resources</phase>

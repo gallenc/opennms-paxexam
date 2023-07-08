@@ -45,6 +45,7 @@
                <target>1.8</target>
             </configuration>
          </plugin>
+         
          <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>properties-maven-plugin</artifactId>
@@ -78,62 +79,7 @@
             </configuration>
          </plugin>
 
-         <!-- This plugin simply makes sure that the feature's required bundles are downloaded into the local /m2 repo for use in resolving in karaf container -->
-         <plugin>
-            <groupId>org.apache.karaf.tooling</groupId>
-            <artifactId>karaf-maven-plugin</artifactId>
-            <version>${karafVersion}</version>
-            <!-- <version>4.4.3</version> -->
-            <executions>
-               <!-- this execution works fine in standard maven build but shows an error in eclipse -->
-               <execution>
-                  <id>features-add-to-repo</id>
-                  <phase>generate-resources</phase>
-                  <goals>
-                     <goal>features-add-to-repository</goal>
-                  </goals>
-                  <configuration>
-                     <descriptors>
-                        <repository>mvn:org.apache.karaf.features/standard/${karafVersion}/xml/features</repository>
-                        <descriptor>mvn:org.opennms.karaf.examples/karaf-camel-example-features/${project.version}/xml</descriptor>
-                     </descriptors>
-                     <features>
-                        <feature>karaf-camel-example-java</feature>
-                        <feature>karaf-camel-example-blueprint</feature>
-                     </features>
-                     <!-- we dont actually use this repo but the plugin will have downloaded jars into the user's .m2 -->
-                     <repository>target/features-repo</repository>
-                  </configuration>
-               </execution>
-            </executions>
-         </plugin>
-
-         <plugin>
-            <groupId>org.eclipse.m2e</groupId>
-            <artifactId>lifecycle-mapping</artifactId>
-            <version>1.0.0</version>
-            <configuration>
-               <lifecycleMappingMetadata>
-                  <pluginExecutions>
-                     <pluginExecution>
-                        <pluginExecutionFilter>
-                           <groupId>org.apache.karaf.tooling</groupId>
-                           <artifactId>karaf-maven-plugin</artifactId>
-                           <versionRange>[0,)</versionRange>
-                           <goals>
-                              <goal>commands-generate-help</goal>
-                              <goal>features-add-to-repository</goal>
-                           </goals>
-                        </pluginExecutionFilter>
-                        <action>
-                           <ignore />
-                        </action>
-                     </pluginExecution>
-                  </pluginExecutions>
-               </lifecycleMappingMetadata>
-            </configuration>
-         </plugin>
-
+ 
       </plugins>
    </build>
 
