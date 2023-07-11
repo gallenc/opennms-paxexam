@@ -56,6 +56,27 @@
             <extensions>true</extensions>
 
             <executions>
+
+               <!-- this creates a KAR for the actual project -->
+               <!-- note that the KAR for camel dependencies is generated separately -->
+               <execution>
+                  <id>create-kar</id>
+                  <goals>
+                     <goal>kar</goal>
+                  </goals>
+                  <configuration>
+                     <featuresFile>mvn:org.opennms.karaf.examples/karaf-camel-example-features/${project.version}/xml</featuresFile>
+                     <finalName>${project.artifactId}-${project.version}</finalName>
+                     <ignoreDependencyFlag>true</ignoreDependencyFlag>
+                     <archive>
+                        <manifestEntries>
+                           <Karaf-Feature-Start>false</Karaf-Feature-Start>
+                        </manifestEntries>
+                     </archive>
+                  </configuration>
+               </execution>
+
+               <!-- this is only used to ensure all required dependencies are downloaded to the local .m2 repo if running without kar installation -->
                <execution>
                   <id>features-add-to-repo</id>
                   <phase>generate-resources</phase>
@@ -71,47 +92,10 @@
                         <feature>karaf-camel-example-java</feature>
                         <feature>karaf-camel-example-blueprint</feature>
                      </features>
-                     <repository>target/repository</repository>
+                     <repository>target/repository-local</repository>
                   </configuration>
                </execution>
-            </executions>
-         </plugin>
 
-         <plugin>
-            <artifactId>maven-assembly-plugin</artifactId>
-            <version>3.6.0</version>
-            <executions>
-               <execution>
-                  <id>make-assembly</id> <!-- this is used for inheritance merges -->
-                  <phase>generate-resources</phase> <!-- bind to the packaging phase -->
-                  <goals>
-                     <goal>single</goal>
-                  </goals>
-                  <configuration>
-                     <descriptors>
-                        <descriptor>src/assembly/kar.xml</descriptor>
-                     </descriptors>
-                  </configuration>
-               </execution>
-            </executions>
-         </plugin>
-
-         <plugin>
-            <groupId>com.coderplus.maven.plugins</groupId>
-            <artifactId>copy-rename-maven-plugin</artifactId>
-            <version>1.0</version>
-            <executions>
-               <execution>
-                  <id>copy-file</id>
-                  <phase>process-resources</phase>
-                  <goals>
-                     <goal>copy</goal>
-                  </goals>
-                  <configuration>
-                     <sourceFile>target/${artifactId}-${version}-kar.zip</sourceFile>
-                     <destinationFile>target/${artifactId}-${version}.kar</destinationFile>
-                  </configuration>
-               </execution>
             </executions>
          </plugin>
 

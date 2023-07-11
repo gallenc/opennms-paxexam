@@ -45,7 +45,7 @@
                <target>1.8</target>
             </configuration>
          </plugin>
-         
+
          <plugin>
             <groupId>org.codehaus.mojo</groupId>
             <artifactId>properties-maven-plugin</artifactId>
@@ -67,21 +67,212 @@
             </executions>
          </plugin>
 
+
          <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-surefire-plugin</artifactId>
             <version>${maven.surefire.plugin.version}</version>
             <configuration>
                <excludes>
-                  <!-- prevent tests running in any package with manual filter. These are manual one off development tests -->
+                  <!-- prevent tests running in any package with manual folder. These are manual one off development tests which need docker-compose running first -->
                   <exclude>**/manual/*.java</exclude>
                </excludes>
             </configuration>
          </plugin>
 
- 
+
       </plugins>
    </build>
+
+   <profiles>
+      <!-- this profile deploys the camel application to an opennms without using paxexam or a shared maven .m2 repository -->
+      <!-- it then runs the simple http tests -->
+      <!-- mvn clean install -P opennms-native -->
+      <profile>
+         <id>opennms-native</id>
+         <activation>
+            <activeByDefault>false</activeByDefault>
+         </activation>
+         <properties>
+            <karafUserName>admin</karafUserName>
+            <karafPassword>admin</karafPassword>
+            <karafPort>8101</karafPort>
+            <karafHost>localhost</karafHost>
+         </properties>
+         <build>
+            <plugins>
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-dependency-plugin</artifactId>
+                  <version>3.6.0</version>
+                  <executions>
+                     <execution>
+                        <id>copy</id>
+                        <phase>package</phase>
+                        <goals>
+                           <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                           <artifactItems>
+                              <artifactItem>
+                                 <groupId>org.opennms.karaf.examples</groupId>
+                                 <artifactId>karaf-cxf-features</artifactId>
+                                 <version>3.6.1</version>
+                                 <type>kar</type>
+                                 <overWrite>true</overWrite>
+                                 <outputDirectory>${project.build.directory}/kars</outputDirectory>
+                              </artifactItem>
+                              <artifactItem>
+                                 <groupId>org.opennms.karaf.examples</groupId>
+                                 <artifactId>karaf-camel-features-modified</artifactId>
+                                 <version>3.21.0</version>
+                                 <type>kar</type>
+                                 <overWrite>true</overWrite>
+                                 <outputDirectory>${project.build.directory}/kars</outputDirectory>
+                              </artifactItem>
+                              <artifactItem>
+                                 <groupId>org.opennms.karaf.examples</groupId>
+                                 <artifactId>karaf-camel-example-kar</artifactId>
+                                 <version>${project.version}</version>
+                                 <type>kar</type>
+                                 <overWrite>true</overWrite>
+                                 <outputDirectory>${project.build.directory}/kars</outputDirectory>
+                              </artifactItem>
+                           </artifactItems>
+                        </configuration>
+                     </execution>
+                  </executions>
+               </plugin>
+
+               <plugin>
+                  <!-- see https://stackoverflow.com/questions/33749124/maven-deploy-to-remote-host-sshscp-not-repository -->
+                  <artifactId>maven-antrun-plugin</artifactId>
+                  <version>1.8</version>
+                  <configuration>
+                     <tasks>
+                        <!-- single directory copy does not guarantee order of deployment of kars -->
+                        <!-- note problem with order of cross kar dependencies https://stackoverflow.com/questions/15696795/in-karaf-is-there-any-way-to-control-the-order-in-which-kar-files-load-regardi -->
+
+                        <!-- <scp todir="admin@localhost:/deploy" port="8101" trust="true" password="admin" failonerror="false" verbose="true" sftp="true"> -->
+                        <!-- <fileset dir="target/kars"> -->
+                        <!-- <include name="*.kar" /> -->
+                        <!-- </fileset> -->
+                        <!-- </scp> -->
+
+                        <!-- copying kars in required order of deployment -->
+                        <scp file="target/kars/karaf-cxf-features-3.6.1.kar" todir="${karafUserName}@${karafHost}:/deploy" port="${karafPort}" trust="true"
+                           password="${karafPassword}" failonerror="false" verbose="true" sftp="true" />
+                        <scp file="target/kars/karaf-camel-features-modified-3.21.0.kar" todir="${karafUserName}@${karafHost}:/deploy" port="${karafPort}"
+                           trust="true" password="${karafPassword}" failonerror="false" verbose="true" sftp="true" />
+                        <scp file="target/kars/karaf-camel-example-kar-0.0.1-SNAPSHOT.kar" todir="${karafUserName}@${karafHost}:/deploy" port="${karafPort}"
+                           trust="true" password="${karafPassword}" failonerror="false" verbose="true" sftp="true" />
+
+                     </tasks>
+                  </configuration>
+                  <executions>
+                     <execution>
+                        <id>scp</id>
+                        <phase>package</phase>
+                        <goals>
+                           <goal>run</goal>
+                        </goals>
+                     </execution>
+                  </executions>
+                  <dependencies>
+                     <dependency>
+                        <groupId>com.jcraft</groupId>
+                        <artifactId>jsch</artifactId>
+                        <version>0.1.53</version>
+                     </dependency>
+                     <dependency>
+                        <groupId>org.apache.ant</groupId>
+                        <artifactId>ant-jsch</artifactId>
+                        <version>1.9.6</version>
+                     </dependency>
+                  </dependencies>
+               </plugin>
+
+
+               <plugin>
+                  <groupId>org.apache.karaf.tooling</groupId>
+                  <artifactId>karaf-maven-plugin</artifactId>
+                  <version>${karafVersion}</version>
+                  <extensions>true</extensions>
+
+                  <executions>
+                     <!-- this doesnt work - deploy using ssh and ant run plugin -->
+                     <!-- <execution> -->
+                     <!-- <id>deploy-to-opennms</id> -->
+                     <!-- <goals> -->
+                     <!-- <goal>deploy</goal> -->
+                     <!-- </goals> -->
+                     <!-- <configuration> -->
+                     <!-- <useProjectArtifact>false</useProjectArtifact> -->
+                     <!-- <useSsh>true</useSsh> -->
+                     <!-- <artifactLocations>${project.build.directory}/kars/karaf-camel-features-modified-3.21.0.kar</artifactLocations> -->
+                     <!-- </configuration> -->
+                     <!-- </execution> -->
+                     <execution>
+                        <id>opennms-client</id>
+                        <goals>
+                           <goal>client</goal>
+                        </goals>
+                        <phase>pre-integration-test</phase>
+                        <configuration>
+                           <commands>
+                              <command>
+                                 <rank>1</rank>
+                                 <command>kar:list</command>
+                              </command>
+                              <command>
+                                 <rank>2</rank>
+                                 <command>feature:install karaf-camel-example-blueprint </command>
+                              </command>
+                              <command>
+                                 <rank>3</rank>
+                                 <command>feature:list | grep karaf-camel-example-blueprint </command>
+                              </command>
+                           </commands>
+                        </configuration>
+                     </execution>
+
+                  </executions>
+
+                  <configuration>
+                     <port>${karafPort}</port>
+                     <host>${karafHost}</host>
+                     <user>${karafUserName}</user>
+                     <password>${karafPassword}</password>
+                  </configuration>
+               </plugin>
+
+               <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-surefire-plugin</artifactId>
+                  <version>${maven.surefire.plugin.version}</version>
+                  <executions>
+                     <execution>
+                        <phase>integration-test</phase>
+                        <goals>
+                           <goal>test</goal>
+                        </goals>
+                        <configuration>
+                           <excludes>
+                              <exclude>none</exclude>
+                           </excludes>
+                           <includes>
+                              <include>**/httpclient/manual/*</include>
+                           </includes>
+                        </configuration>
+                     </execution>
+                  </executions>
+               </plugin>
+
+            </plugins>
+         </build>
+      </profile>
+
+   </profiles>
 
    <dependencies>
 

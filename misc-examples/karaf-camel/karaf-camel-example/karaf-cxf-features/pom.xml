@@ -16,32 +16,15 @@
       <version>0.0.1-SNAPSHOT</version>
    </parent>
 
-   <artifactId>karaf-camel-features-modified</artifactId>
-   <version>3.21.0</version>
+   <artifactId>karaf-cxf-features</artifactId>
+   <version>3.6.1</version>
    <packaging>pom</packaging>
-   <name>karaf-camel-features-modified</name>
+   <name>karaf-cxf-features</name>
 
    <build>
-      <resources>
-         <resource>
-            <directory>src/main/feature</directory>
-            <filtering>true</filtering>
-            <targetPath>${project.build.directory}/feature</targetPath>
-         </resource>
-      </resources>
+      
       <plugins>
-         <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-resources-plugin</artifactId>
-            <executions>
-               <execution>
-                  <goals>
-                     <goal>resources</goal>
-                  </goals>
-               </execution>
-            </executions>
-         </plugin>
-
+       
          <plugin>
             <groupId>org.apache.karaf.tooling</groupId>
             <artifactId>karaf-maven-plugin</artifactId>
@@ -53,8 +36,8 @@
                   <goals>
                      <goal>kar</goal>
                   </goals>
-                  <configuration>
-                     <featuresFile>${project.build.directory}/feature/feature.xml</featuresFile>
+                  <configuration>    
+                     <featuresFile>mvn:org.apache.cxf.karaf/apache-cxf/3.6.1/xml/features</featuresFile>
                      <finalName>${project.artifactId}</finalName>
                      <ignoreDependencyFlag>true</ignoreDependencyFlag>
                      <archive>
@@ -79,10 +62,6 @@
                   </goals>
                   <configuration>
                      <artifacts>
-                        <artifact>
-                           <file>${project.build.directory}/feature/feature.xml</file>
-                           <type>xml</type>
-                        </artifact>
                         <artifact>
                            <file>${project.build.directory}/${project.artifactId}.kar</file>
                            <type>kar</type>

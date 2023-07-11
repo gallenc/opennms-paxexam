@@ -1,0 +1,1 @@
+repackaging of apache cxf features as kar
