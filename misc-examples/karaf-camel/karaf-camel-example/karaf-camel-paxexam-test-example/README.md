@@ -109,7 +109,7 @@ log:tail
 
 Now you can manually run the test in the IDE. 
 
-The test class [HttpClientTests.java](../karaf-camel-example/karaf-camel-paxexam-test-example/src/test/java/org/opennms/karaf/httpclient/manual/HttpClientTests.java) contains ReST tests using Apache HTTPClient which exercise the camel routes. 
+The test class [HttpClientTests.java](../karaf-camel-paxexam-test-example/src/test/java/org/opennms/karaf/httpclient/manual/HttpClientTests.java) contains ReST tests using Apache HTTPClient which exercise the camel routes. 
 
 The tests replicate the curl calls documented in the [original karaf camel example readme](../../karaf-camel-example/originalReadme.md)
 
@@ -119,8 +119,8 @@ The paxexam-opennms driven tests install the features and run the same HTTPClien
 The tests manipulate the Karaf container directly to install and uninstall the features.
 There is no need to install features directly as in the stand alone tests above.
 
-* [CamelBlueprintTest.java](../karaf-camel-example/karaf-camel-paxexam-test-example/src/test/java/org/opennms/karaf/paxexamest/manual/CamelBlueprintTest.java) Installs and tests karaf-camel-example-blueprint and then uninstalls the module. 
-* [CamelJavaTest.java](../karaf-camel-example/karaf-camel-paxexam-test-example/src/test/java/org/opennms/karaf/paxexamest/manual/CamelJavaTest.java) Installs and tests karaf-camel-example-java and then uninstalls the module. 
+* [CamelBlueprintTest.java](../karaf-camel-paxexam-test-example/src/test/java/org/opennms/karaf/paxexamest/manual/CamelBlueprintTest.java) Installs and tests karaf-camel-example-blueprint and then uninstalls the module. 
+* [CamelJavaTest.java](../karaf-camel-paxexam-test-example/src/test/java/org/opennms/karaf/paxexamest/manual/CamelJavaTest.java) Installs and tests karaf-camel-example-java and then uninstalls the module. 
 
 
 ### Maven deploying and testing Kar files without paxexam.
@@ -148,13 +148,13 @@ ssh admin@localhost -p 8101  -o StrictHostKeyChecking=no
 Now you can run the tests as part of the maven build.
 
 Thie opennms-native profile deploys the camel application to an opennms without using paxexam or a shared maven .m2 repository.
-It then automatically runs the tests in [HttpClientTests.java](../karaf-camel-example/karaf-camel-paxexam-test-example/src/test/java/org/opennms/karaf/httpclient/manual/HttpClientTests.java).
+It then automatically runs the tests in [HttpClientTests.java](../karaf-camel-paxexam-test-example/src/test/java/org/opennms/karaf/httpclient/manual/HttpClientTests.java).
 
 ```
 mvn clean install -P opennms-native
 
 ```
-The project will use SFTP to deploy the 3 Kar files into the running horizon and then automatically run the tests in [HttpClientTests.java](../karaf-camel-example/karaf-camel-paxexam-test-example/src/test/java/org/opennms/karaf/httpclient/manual/HttpClientTests.java)
+The project will use SFTP to deploy the 3 Kar files into the running horizon and then the maven surefire plugin will automatically run the tests in [HttpClientTests.java](../karaf-camel-paxexam-test-example/src/test/java/org/opennms/karaf/httpclient/manual/HttpClientTests.java)
 
 
 
