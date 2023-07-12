@@ -4,6 +4,8 @@ This example shows how a simple [Apache Camel 3](https://camel.apache.org/) appl
 
 An introductory video describing this project is available at [OpenNMS PaxExam Karaf Camel 3 Test](https://youtu.be/lEFQ2GH2pR0)
 
+[![alt text](../../karaf-camel-example/docs/images/CamelVideoThumb.webp)](https://youtu.be/lEFQ2GH2pR0)
+
 ## Motivation
 
 The motivation for this example is that Camel 3 provides a lot of [components](https://camel.apache.org/components/3.20.x/index.html) which could be used to significantly speed up the delivery of OpenNMS integration plugins. 
