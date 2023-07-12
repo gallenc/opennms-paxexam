@@ -9,6 +9,8 @@ The project illustrates testing a camel ReST project in three scenarios:
 * Paxexam-opennms driven tests - Automatic installation and testing using opennms-paxexam
 * Automatic testing using maven-karaf-plugin without opennms-paxexam - Maven deploying and testing Kar files without paxexam
 
+An introductory video describing this project is available at [OpenNMS PaxExam Karaf Camel 3 Test](https://youtu.be/lEFQ2GH2pR0)
+
 ## Setting up the test environment
 
 To run the tests, you first need to build and install the core classes. 
@@ -69,6 +71,10 @@ docker-compose up -d
 # once the karaf has started log into the container and then ssh to the karaf
 docker-compose exec karaf1 bash
 
+# this starts a local karaf terminal directly in the container (where ssh-client is not installed)
+/opt/apache-karaf/bin/client -a 8101
+
+## this would allow you to ssh to the container externally
 ssh karaf@localhost -p 8101  -o StrictHostKeyChecking=no
 # (password karaf)
 
@@ -104,7 +110,7 @@ feature:install karaf-camel-example-blueprint
 feature:list | grep karaf-camel-example-blueprint
 
 # you can see the application installed and running using
-log:tail
+log:tail -f
 ```
 
 Now you can manually run the test in the IDE. 

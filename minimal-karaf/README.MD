@@ -7,7 +7,7 @@
  
  bin/client -a 8101
  
-  /opt/apache-karaf/bin/client -a 8101
+/opt/apache-karaf/bin/client -a 8101
  
 apt-get install update
   

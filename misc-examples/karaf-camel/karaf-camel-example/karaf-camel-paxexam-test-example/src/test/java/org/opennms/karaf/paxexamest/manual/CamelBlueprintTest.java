@@ -47,15 +47,6 @@ public class CamelBlueprintTest extends TestBase {
 	public void testProvisioning() throws Exception {
 		LOG.warn("***************** TRYING TO INSTALL AND TEST "+TEST_FEATURE_NAME);
 		
-		LOG.warn("***************** INSTALLING REPO "+TEST_FEATURE_REPO);
-		LOG.warn(executeCommand("feature:repo-add "+TEST_FEATURE_REPO));
-
-		LOG.warn("***************** INSTALLING FEATURE "+TEST_FEATURE_NAME);
-		
-		LOG.warn(executeCommand("feature:install "+TEST_FEATURE_NAME));
-
-		LOG.warn("***************** FINISHED INSTALLING FEATURE "+TEST_FEATURE_NAME);
-		
 		// this is needed because simple karaf container does not have these bundles by default
 		// (opennms does have httpclient)
 		
@@ -64,8 +55,21 @@ public class CamelBlueprintTest extends TestBase {
 		LOG.warn(executeCommand("bundle:install mvn:org.apache.httpcomponents/httpcore-osgi/4.4.16"));
 		
 		LOG.warn(executeCommand("bundle:install mvn:org.apache.httpcomponents/httpclient-osgi/4.5.14"));
+		
+		LOG.warn(executeCommand("bundle:list | grep HttpClient"));
 
 		LOG.warn("***************** FINISHED INSTALLING HTTPCLIENT FOR TESTS");
+		
+		
+		LOG.warn("***************** INSTALLING REPO "+TEST_FEATURE_REPO);
+		LOG.warn(executeCommand("feature:repo-add "+TEST_FEATURE_REPO));
+
+		LOG.warn("***************** INSTALLING FEATURE "+TEST_FEATURE_NAME);
+		
+		LOG.warn(executeCommand("feature:install "+TEST_FEATURE_NAME));
+
+		LOG.warn("***************** FINISHED INSTALLING FEATURE "+TEST_FEATURE_NAME);
+
 	}
 	
 

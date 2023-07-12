@@ -22,11 +22,12 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.opennms.karaf.httpclient.manual.HttpClientTests;
 import org.ops4j.pax.exam.ExamFactory;
 import org.ops4j.pax.exam.junit.PaxExam;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import org.opennms.karaf.httpclient.manual.HttpClientTests;
 
 // see https://stackoverflow.com/questions/33921107/pax-exam-execute-command-against-karaf
 // see also https://github.com/ANierbeck/Karaf-Cassandra/blob/master/Karaf-Cassandra-ITest/src/test/java/de/nierbeck/cassandra/itest/TestBase.java
@@ -46,6 +47,20 @@ public class CamelJavaTest extends TestBase {
 	public void testProvisioning() throws Exception {
 		LOG.warn("***************** TRYING TO INSTALL AND TEST "+TEST_FEATURE_NAME);
 		
+		// this is needed because simple karaf container does not have these bundles by default
+		// (opennms does have httpclient)
+		
+		LOG.warn("***************** INSTALLING HTTPCLIENT FOR TESTS");
+		
+		LOG.warn(executeCommand("bundle:install mvn:org.apache.httpcomponents/httpcore-osgi/4.4.16"));
+		
+		LOG.warn(executeCommand("bundle:install mvn:org.apache.httpcomponents/httpclient-osgi/4.5.14"));
+		
+		LOG.warn(executeCommand("bundle:list | grep HttpClient"));
+
+		LOG.warn("***************** FINISHED INSTALLING HTTPCLIENT FOR TESTS");
+
+		
 		LOG.warn("***************** INSTALLING REPO "+TEST_FEATURE_REPO);
 		LOG.warn(executeCommand("feature:repo-add "+TEST_FEATURE_REPO));
 
@@ -55,17 +70,6 @@ public class CamelJavaTest extends TestBase {
 
 		LOG.warn("***************** FINISHED INSTALLING FEATURE "+TEST_FEATURE_NAME);
 		
-		// this is needed because a simple karaf container does not have these bundles by default
-		// (opennms does have httpclient)
-		
-		LOG.warn("***************** INSTALLING HTTPCLIENT FOR TESTS");
-		
-		LOG.warn(executeCommand("bundle:install mvn:org.apache.httpcomponents/httpcore-osgi/4.4.16"));
-		
-		LOG.warn(executeCommand("bundle:install mvn:org.apache.httpcomponents/httpclient-osgi/4.5.14"));
-
-		LOG.warn("***************** FINISHED INSTALLING HTTPCLIENT FOR TESTS");
-
 	}
 	
 	@Test
