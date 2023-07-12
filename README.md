@@ -18,6 +18,8 @@ For a brief video tutorial see:
 
 [![alt text](../main/docs/images/paxexam-vid.jpg)](https://youtu.be/e6OQfn-xnxg)
 
+More advanced examples with videos are also provided in  [misc-examples](../main/misc-examples)
+
 ## Overview
 [Pax-Exam](https://ops4j1.jira.com/wiki/spaces/PAXEXAM4/overview) is a fantastic test framework which supports in-container testing.
  
@@ -68,6 +70,8 @@ For more detailed information on how the system works see
 To run some test examples see
 
 [Running Examples](../main/docs/RunningExamples.md)
+
+More advanced examples with videos are also provided in  [misc-examples](../main/misc-examples)
 
 ## Credits and Licensing
 
