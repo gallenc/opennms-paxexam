@@ -35,16 +35,14 @@ These modules have been copied substantially unchanged from the original example
 | ------------- | ------------- |
 | [karaf-camel-example-java](../karaf-camel-example/karaf-camel-example-java) | Demonstrates a camel route configured using java. See [CamelComponent.java](../karaf-camel-example/karaf-camel-example-java/src/main/java/org/apache/karaf/examples/camel/java/CamelComponent.java). (A minor bug in the routing has been fixed). |
 | [karaf-camel-example-blueprint](../karaf-camel-example/karaf-camel-example-blueprint) | Demonstrates a camel route configured in xml using the Camel Blueprint format. See [route.xml](../karaf-camel-example//karaf-camel-example-blueprint/src/main/resources/OSGI-INF/blueprint/route.xml) |
-| [karaf-camel-example-features](../karaf-camel-example/karaf-camel-example-features) | Creates a features file which can load either the blueprint or java configured examples. (Note you can only activate one at a time) |
-
-The [karaf-camel-example-features](../karaf-camel-example/karaf-camel-example-features) module creates a features file which calls in the features from Camel 3 and Apache CXF which are used in the example.
+| [karaf-camel-example-features](../karaf-camel-example/karaf-camel-example-features) | Creates a features file which can load either the blueprint or java configured examples. (Note you can only activate one at a time). The module creates a features file which calls in the features from Camel 3 and Apache CXF which are used in the example. |
 
 ## Downloading maven dependencies and packaging as Kar archives
 
 Once the project is built, there are three approaches to deploying it in Karaf.
 
-The first approach is to deploy the module to a maven repo and have Karaf use that repo for downloading dependencies.
-If a feature:install command is used, it can download the feature definition from maven and then download the full application.
+The first approach is to publish (deploy) the module to a public or private maven repository server and have Karaf use that repo for downloading dependencies.
+If a feature:install command is used, Karaf can download the feature definition and bundles from maven and then install the full application.
 
 During development, it is unlikely that a separate maven repository will be used so the second approach is to share the users local ~/.m2/repository  with Karaf. 
 Any locally built artifacts will be immediately available to the container. 
@@ -61,7 +59,7 @@ Examples of using a Kar and of using a local .m2/repository are provided in this
 The [karaf-maven-plugin](https://svn.apache.org/repos/asf/karaf/site/production/manual/latest/karaf-maven-plugin.html) is used to download all of the bundles used in each feature in order to have them available in the local .m2/repository.
 The plugin is also used to package Kar files. 
 
-Unfortunately the karaf-mavel-plugin cannot read the standard camel features file because it cannot deal with version ranges in repository definitions. 
+Unfortunately the karaf-mavel-plugin cannot read the published camel features file because it cannot deal with version ranges in repository definitions. 
 
 ```
 apache-camel-3.21.0-features.xml
@@ -91,7 +89,7 @@ This is done by the [karaf-camel-features-modified](../karaf-camel-example/karaf
   <repository>mvn:org.ops4j.pax.cdi/pax-cdi-features/1.1.4/xml/features</repository>
 ```
 
-Having modified the camel features, the following plugin configuration can be used to ensure all the required dependencies in the local ./m2/repository. (see [karaf-camel-example-kar/pom.xml](../karaf-camel-example/karaf-camel-example-kar/pom.xml)
+Having modified the camel features, the following plugin configuration can be used to ensure all the required dependencies in the local ./m2/repository. ( See [karaf-camel-example-kar/pom.xml](../karaf-camel-example/karaf-camel-example-kar/pom.xml) )
 
 ```
          <plugin>
@@ -158,13 +156,5 @@ We now consider the new integration test project which  tests the running exampl
 | ------------- | ------------- |
 | [karaf-camel-paxexam-test-example](../karaf-camel-example/karaf-camel-paxexam-test-example) |A project containing tests of the Camel module which can be run locally or using paxexam-opennms |
 
-### Stand alone tests
-
-
-### Paxexam-opennms driven tests
-
-
-### deploying and testing Kar files without paxexam.
-
-
+For more details on this module see [karaf-camel-paxexam-test-example](../karaf-camel-example/karaf-camel-paxexam-test-example/README.md)
 
