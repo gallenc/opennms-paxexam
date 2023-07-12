@@ -5,4 +5,4 @@ This folder is to hold various examples of using the paxexam-opennms framework t
 ## contents
 | Project | description |
 | --------|-------------|
-| [camel-examples](../camel-examples) | projects illustrating the use of [Apache Camel 3](https://camel.apache.org/) |
+| [camel-examples](../misc-examples/camel-examples) | projects illustrating the use of [Apache Camel 3](https://camel.apache.org/) |
