@@ -125,7 +125,7 @@ There is no need to install features directly as in the stand alone tests above.
 
 ### Maven deploying and testing Kar files without paxexam.
 
-It is also possible to test deploying the built Kar files directly in karaf or OpenNMS using the opennms-native profile within the [test project's pom.xml](../karaf-camel-example/karaf-camel-paxexam-test-example/pom.xml).
+It is also possible to test deploying the built Kar files directly in karaf or OpenNMS using the opennms-native profile within the [test project's pom.xml](../karaf-camel-paxexam-test-example/pom.xml).
 
 To do this, you can use a native OpenNMS installation or use an OpenNMS docker-compose project without paxexam from the OpenNMS-forge/stack-play repo. 
 For example [OpenNMS-forge/stack-play/minimal-horizon](https://github.com/opennms-forge/stack-play/tree/main/minimal-horizon)
@@ -152,7 +152,6 @@ It then automatically runs the tests in [HttpClientTests.java](../karaf-camel-pa
 
 ```
 mvn clean install -P opennms-native
-
 ```
 The project will use SFTP to deploy the 3 Kar files into the running horizon and then the maven surefire plugin will automatically run the tests in [HttpClientTests.java](../karaf-camel-paxexam-test-example/src/test/java/org/opennms/karaf/httpclient/manual/HttpClientTests.java)
 
