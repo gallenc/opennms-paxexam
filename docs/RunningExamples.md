@@ -31,14 +31,14 @@ Once the build is successful, you can proceed to running the tests.
 
 One example test project is provided 
 
-[opennms-paxexam-test-example](../opennms-paxexam-test-example)
+[opennms-paxexam-test-example](../test-example/opennms-paxexam-test-example)
 
 This can be run against either one of two test environments using docker-compose.
 
-[minimal-karaf](../minimal-karaf)
+[minimal-karaf](../test-example/minimal-karaf)
 A simple project which runs a vanilla Karaf container in docker.
 
-[minimal-horizon](../minimal-horizon)
+[minimal-horizon](../test-example/minimal-horizon)
 A more complex project which runs a full OpenNMS horizon system and a couple of snmp agents for testing.
 
 Note that onle one of these projects can be run at a time since they have overlapping public ports. 
