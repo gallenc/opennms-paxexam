@@ -69,9 +69,9 @@
 
                         <!-- misc directory - only for in-container tests -->
                         <artifactItem>
-                           <groupId>org.opennms.example.paxexam</groupId>
+                           <groupId>org.opennms.integration.paxexam</groupId>
                            <artifactId>opennms-paxexam-container-remote</artifactId>
-                           <version>0.0.1-SNAPSHOT</version>
+                           <version>${opennms-paxexam.version}</version>
                            <type>jar</type>
                            <overWrite>true</overWrite>
                            <outputDirectory>${project.basedir}/container-fs/misc</outputDirectory>

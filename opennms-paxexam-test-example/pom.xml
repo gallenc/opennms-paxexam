@@ -97,7 +97,7 @@
       </dependency>
 
       <dependency>
-         <groupId>org.opennms.example.paxexam</groupId>
+         <groupId>org.opennms.integration.paxexam</groupId>
          <artifactId>opennms-paxexam-container-remote</artifactId>
          <version>${opennms-paxexam.version}</version>
          <scope>test</scope>
