@@ -39,8 +39,8 @@ services:
       - ./karaf1/etc/org.ops4j.pax.logging.cfg:/opt/apache-karaf/etc/org.ops4j.pax.logging.cfg
       - ./karaf1/etc/org.ops4j.pax.url.mvn.cfg:/opt/apache-karaf/etc/org.ops4j.pax.url.mvn.cfg
       - ./karaf1/deploy:/opt/apache-karaf/deploy
-      - ./karaf1/lib/boot/pax-exam-container-rbc-onms-4.13.5.jar:/opt/apache-karaf/lib/boot/pax-exam-container-rbc-onms-4.13.5.jar
       - ./karaf1/lib/boot/pax-exam-4.13.5.jar:/opt/apache-karaf/lib/boot/pax-exam-4.13.5.jar
+      - ./karaf1/lib/boot/pax-exam-container-rbc-onms-0.0.1-SNAPSHOT.jar:/opt/apache-karaf/lib/boot/pax-exam-container-rbc-onms-0.0.1-SNAPSHOT.jar
       - ./karaf1/lib/boot/opennms-paxexam-rmi-server-0.0.1-SNAPSHOT.jar:/opt/apache-karaf/lib/boot/opennms-paxexam-rmi-server-0.0.1-SNAPSHOT.jar
       - ./karaf1/misc:/misc
     command: karaf

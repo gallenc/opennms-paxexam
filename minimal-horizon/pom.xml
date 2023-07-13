@@ -11,6 +11,7 @@
 
    <properties>
       <paxexam.version>4.13.5</paxexam.version>
+      <opennms-paxexam.version>0.0.1-SNAPSHOT</opennms-paxexam.version>
       <osgi.version>6.0.0</osgi.version>
    </properties>
 
@@ -32,31 +33,14 @@
                      <artifactItems>
                         <!-- deploy directory -->
                         <artifactItem>
-                           <groupId>org.ops4j.pax.exam</groupId>
+                           <groupId>org.opennms.integration.paxexam</groupId>
                            <artifactId>pax-exam-features-opennms</artifactId>
-                           <version>${paxexam.version}</version>
+                           <version>${opennms-paxexam.version}</version>
                            <type>xml</type>
                            <overWrite>true</overWrite>
                            <outputDirectory>${project.basedir}/container-fs/opt/opennms/deploy</outputDirectory>
                         </artifactItem>
-                        <!-- now in injected .m2 repo -->
-                        <!-- <artifactItem> -->
-                        <!-- <groupId>org.opennms.integration.paxexam</groupId> -->
-                        <!-- <artifactId>opennms-paxexam-rmi-server</artifactId> -->
-                        <!-- <version>0.0.1-SNAPSHOT</version> -->
-                        <!-- <type>jar</type> -->
-                        <!-- <overWrite>true</overWrite> -->
-                        <!-- <outputDirectory>${project.basedir}/karaf1/deploy/</outputDirectory> -->
-                        <!-- </artifactItem> -->
 
-                        <!-- <artifactItem> -->
-                        <!-- <groupId>org.ops4j.pax.exam</groupId> -->
-                        <!-- <artifactId>pax-exam-container-rbc-onms</artifactId> -->
-                        <!-- <version>${paxexam.version}</version> -->
-                        <!-- <type>jar</type> -->
-                        <!-- <overWrite>true</overWrite> -->
-                        <!-- <outputDirectory>${project.basedir}/karaf1/deploy/</outputDirectory> -->
-                        <!-- </artifactItem> -->
                         <!-- Boot directory -->
                         <artifactItem>
                            <groupId>org.ops4j.pax.exam</groupId>
@@ -67,9 +51,9 @@
                            <outputDirectory>${project.basedir}/container-fs/opt/opennms-overlay/lib</outputDirectory>
                         </artifactItem>
                         <artifactItem>
-                           <groupId>org.ops4j.pax.exam</groupId>
+                           <groupId>org.opennms.integration.paxexam</groupId>
                            <artifactId>pax-exam-container-rbc-onms</artifactId>
-                           <version>${paxexam.version}</version>
+                           <version>${opennms-paxexam.version}</version>
                            <type>jar</type>
                            <overWrite>true</overWrite>
                            <outputDirectory>${project.basedir}/container-fs/opt/opennms-overlay/lib</outputDirectory>
@@ -77,7 +61,7 @@
                         <artifactItem>
                            <groupId>org.opennms.integration.paxexam</groupId>
                            <artifactId>opennms-paxexam-rmi-server</artifactId>
-                           <version>0.0.1-SNAPSHOT</version>
+                           <version>${opennms-paxexam.version}</version>
                            <type>jar</type>
                            <overWrite>true</overWrite>
                            <outputDirectory>${project.basedir}/container-fs/opt/opennms-overlay/lib</outputDirectory>
@@ -93,9 +77,9 @@
                            <outputDirectory>${project.basedir}/container-fs/misc</outputDirectory>
                         </artifactItem>
                         <artifactItem>
-                           <groupId>org.ops4j.pax.exam</groupId>
+                           <groupId>org.opennms.integration.paxexam</groupId>
                            <artifactId>pax-exam-container-rbc-onms</artifactId>
-                           <version>${paxexam.version}</version>
+                           <version>${opennms-paxexam.version}</version>
                            <type>jar</type>
                            <overWrite>true</overWrite>
                            <outputDirectory>${project.basedir}/container-fs/misc</outputDirectory>
@@ -111,7 +95,7 @@
                         <artifactItem>
                            <groupId>org.opennms.integration.paxexam</groupId>
                            <artifactId>opennms-paxexam-rmi-server</artifactId>
-                           <version>0.0.1-SNAPSHOT</version>
+                           <version>${opennms-paxexam.version}</version>
                            <type>jar</type>
                            <overWrite>true</overWrite>
                            <outputDirectory>${project.basedir}/container-fs/misc</outputDirectory>

@@ -9,10 +9,8 @@
       <version>0.0.1-SNAPSHOT</version>
    </parent>
 
-   <groupId>org.ops4j.pax.exam</groupId>
    <artifactId>pax-exam-container-rbc-onms</artifactId>
    <packaging>bundle</packaging>
-   <version>${paxexam.version}</version>
 
    <name>pax-exam-container-rbc-onms</name>
 
@@ -34,7 +32,7 @@
                   <Bundle-Version>${project.version}</Bundle-Version>
                   <Bundle-Activator>org.ops4j.pax.exam.rbc.internal.Activator</Bundle-Activator>
                   <Export-Package>
-                     org.ops4j.pax.exam.rbc.internal*;version=${project.version}
+                     org.ops4j.pax.exam.rbc.internal*;version=${paxexam.version}
                   </Export-Package>
                   <Import-Package>
                      *
