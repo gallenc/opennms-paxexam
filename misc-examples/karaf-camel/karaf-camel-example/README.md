@@ -4,7 +4,7 @@ This example shows how a simple [Apache Camel 3](https://camel.apache.org/) appl
 
 An introductory video describing this project is available at [OpenNMS PaxExam Karaf Camel 3 Test](https://youtu.be/lEFQ2GH2pR0)
 
-[![alt text](../../karaf-camel-example/docs/images/CamelVideoThumb.webp)](https://youtu.be/lEFQ2GH2pR0)
+[![alt text](../karaf-camel-example/docs/images/CamelVideoThumb.webp)](https://youtu.be/lEFQ2GH2pR0)
 
 ## Motivation
 
