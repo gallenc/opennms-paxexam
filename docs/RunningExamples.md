@@ -34,7 +34,7 @@ This contains opennms-paxexam tests in
 
 [opennms-paxexam-test-example](../test-example/opennms-paxexam-test-example)
 
-Which can be run against either one of two test environments using docker-compose.
+These tests can be run against either one of two test environments using docker-compose.
 
 [minimal-karaf](../test-example/minimal-karaf)
 A simple project which runs a vanilla Karaf container in docker.
@@ -48,7 +48,7 @@ In both cases, the RMI port 55555 is exposed for pax-exam to use to install test
 The test environments need set up before you run any tests.
 To do this there is a pom.xml file in each project which will download the required dependencies and place them in the correct folders to be picked up when the docker-compose projects are started.
 
-for example in the minimal-karaf project:
+For example in the minimal-karaf project:
 
 ```
 cd minimal-karaf
@@ -58,7 +58,7 @@ mvn clean install
 docker-compose up -d
 ```
 
-once the project is started you can then run the tests 
+Once the project is started you can then run the tests 
 
 ```
 cd opennms-paxexam-test-example
