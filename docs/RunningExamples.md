@@ -29,11 +29,12 @@ Once the build is successful, you can proceed to running the tests.
 
 ## Running the tests
 
-One example test project is provided 
+An example test project is provided in [test-example](../test-example)
+This contains opennms-paxexam tests in
 
 [opennms-paxexam-test-example](../test-example/opennms-paxexam-test-example)
 
-This can be run against either one of two test environments using docker-compose.
+Which can be run against either one of two test environments using docker-compose.
 
 [minimal-karaf](../test-example/minimal-karaf)
 A simple project which runs a vanilla Karaf container in docker.
