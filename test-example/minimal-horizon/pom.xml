@@ -11,7 +11,7 @@
 
    <properties>
       <paxexam.version>4.13.5</paxexam.version>
-      <opennms-paxexam.version>0.0.1-SNAPSHOT</opennms-paxexam.version>
+      <opennms-paxexam.version>0.0.1</opennms-paxexam.version>
       <osgi.version>6.0.0</osgi.version>
    </properties>
 

@@ -11,7 +11,7 @@
       <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
       <java.version>8</java.version>
 
-      <opennms-paxexam.version>0.0.1-SNAPSHOT</opennms-paxexam.version>
+      <opennms-paxexam.version>0.0.1</opennms-paxexam.version>
 
       <karafVersion>4.3.6</karafVersion> <!-- same opennms 31 -->
       <felix.framework.version>6.0.5</felix.framework.version> <!-- same as karaf opennms -->

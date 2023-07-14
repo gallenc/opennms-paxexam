@@ -6,7 +6,7 @@
    <parent>
       <groupId>org.opennms.integration.paxexam</groupId>
       <artifactId>opennms-paxexam-parent</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>0.0.1</version>
    </parent>
 
    <artifactId>pax-exam-container-rbc-onms</artifactId>
