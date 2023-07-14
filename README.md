@@ -81,16 +81,16 @@ All artifacts are versioned with the next release SNAPSHOT
 The master branch is the last published release and each release is also tagged on release.
 
 The example test projects are intended to be copied and modified. (We may create an archetype later).
-They are not published to maven and always use SNAPSHOT versioning which matches every release (0.0.1-SNAPSHOT 0.0.2-SNAPSHOT etc)
+They are not published to maven and always use SNAPSHOT versioning which matches every release (0.0.2-SNAPSHOT 0.0.2-SNAPSHOT etc)
 
 The example test projects reference the version of the opennms-paxexam system they are using.
 
-Change the opennms-paxexam.version property to use a different published version of opennms-paxexam (e.g. replace 0.0.1-SNAPSHOT with 0.0.1).
+Change the opennms-paxexam.version property to use a different published version of opennms-paxexam (e.g. replace 0.0.2-SNAPSHOT with 0.0.1).
 
 ```
    <properties>
       ...
-      <opennms-paxexam.version>0.0.1-SNAPSHOT</opennms-paxexam.version>
+      <opennms-paxexam.version>0.0.2-SNAPSHOT</opennms-paxexam.version>
       ...
    </properties>
 ```
@@ -99,7 +99,7 @@ Only the core opennms-paxexam system modules are are published to maven.
 That is, only the modules built under [opennms-paxexam-parent](../opennms-paxexam-parent).
 
 For stability, only release versions are published. 
-i.e. 0.0.1 and never 0.0.1-SNAPSHOT
+i.e. 0.0.1 and never 0.0.2-SNAPSHOT
 
 Build the [opennms-paxexam-parent](../opennms-paxexam-parent) modules locally if you want to work with snapshots.
 

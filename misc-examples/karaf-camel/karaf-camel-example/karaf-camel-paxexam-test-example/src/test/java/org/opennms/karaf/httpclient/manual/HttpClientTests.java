@@ -24,7 +24,7 @@ import org.apache.http.impl.client.HttpClients;
  * 
  * to do this log into the karaf server
  * 
- * 		feature:repo-add mvn:org.opennms.karaf.examples/karaf-camel-example-features/0.0.1-SNAPSHOT/xml
+ * 		feature:repo-add mvn:org.opennms.karaf.examples/karaf-camel-example-features/0.0.2-SNAPSHOT/xml
  *      feature:install karaf-camel-example-blueprint
  *      
  *      # this is needed because a simple karaf container does not have these bundles by default. (opennms does have httpclient)

@@ -4,14 +4,14 @@
    <modelVersion>4.0.0</modelVersion>
    <groupId>org.opennms.example.paxexam</groupId>
    <artifactId>opennms-paxexam-test-example</artifactId>
-   <version>0.0.1-SNAPSHOT</version>
+   <version>0.0.2-SNAPSHOT</version>
 
    <properties>
       <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
       <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
       <java.version>8</java.version>
       
-      <opennms-paxexam.version>0.0.1-SNAPSHOT</opennms-paxexam.version>
+      <opennms-paxexam.version>0.0.2-SNAPSHOT</opennms-paxexam.version>
 
       <karafVersion>4.3.6</karafVersion> <!-- same opennms 31 -->
       <felix.framework.version>6.0.5</felix.framework.version> <!-- same as karaf opennms -->

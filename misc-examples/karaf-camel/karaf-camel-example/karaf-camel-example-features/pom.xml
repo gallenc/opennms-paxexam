@@ -13,7 +13,7 @@
    <parent>
       <groupId>org.opennms.karaf.examples</groupId>
       <artifactId>karaf-camel-example</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>0.0.2-SNAPSHOT</version>
    </parent>
 
    <artifactId>karaf-camel-example-features</artifactId>

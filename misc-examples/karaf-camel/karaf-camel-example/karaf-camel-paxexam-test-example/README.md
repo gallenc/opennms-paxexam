@@ -101,7 +101,7 @@ Once your test container is running you can install the camel feature
 ```
 
 # add the features from this project 
-feature:repo-add mvn:org.opennms.karaf.examples/karaf-camel-example-features/0.0.1-SNAPSHOT/xml
+feature:repo-add mvn:org.opennms.karaf.examples/karaf-camel-example-features/0.0.2-SNAPSHOT/xml
 feature:install karaf-camel-example-blueprint
 
 #(or feature:install karaf-camel-example-java)

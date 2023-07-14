@@ -127,7 +127,7 @@ The test can be run within the OpenNMS horizon docker container using the follow
 (You can change the address and port to suit the local configuration. e.g. TestRMILookup horizon 55555). 
 ```
 cd /usr/share/opennms/share/misc
-java -cp opennms-paxexam-rmi-server-0.0.1-SNAPSHOT.jar:opennms-paxexam-container-remote-0.0.1-SNAPSHOT.jar:pax-exam-container-rbc-onms-4.13.5.jar:pax-exam-4.13.5.jar:org.osgi.core-6.0.0.jar org.opennms.paxexam.container.main.TestRMILookup localhost 55555
+java -cp opennms-paxexam-rmi-server-0.0.2-SNAPSHOT.jar:opennms-paxexam-container-remote-0.0.2-SNAPSHOT.jar:pax-exam-container-rbc-onms-4.13.5.jar:pax-exam-4.13.5.jar:org.osgi.core-6.0.0.jar org.opennms.paxexam.container.main.TestRMILookup localhost 55555
 
 result:
 

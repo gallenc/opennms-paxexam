@@ -37,7 +37,7 @@ import org.opennms.karaf.httpclient.manual.HttpClientTests;
 public class CamelBlueprintTest extends TestBase {
 	private static Logger LOG = LoggerFactory.getLogger(CamelBlueprintTest.class);
 
-	public String TEST_FEATURE_REPO = "mvn:org.opennms.karaf.examples/karaf-camel-example-features/0.0.1-SNAPSHOT/xml";
+	public String TEST_FEATURE_REPO = "mvn:org.opennms.karaf.examples/karaf-camel-example-features/0.0.2-SNAPSHOT/xml";
 	
 	//public String TEST_FEATURE_NAME = "karaf-camel-example-java";
 	
