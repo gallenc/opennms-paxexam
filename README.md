@@ -73,6 +73,45 @@ To run some test examples see
 
 More advanced examples with videos are also provided in  [misc-examples](../main/misc-examples)
 
+## Artifact Deployment
+
+Only the core opennms-paxexam system modules are are published to maven. 
+That is, only the modules built under [opennms-paxexam-parent](../opennms-paxexam-parent).
+
+For stability, only release versions are published. 
+Build [opennms-paxexam-parent](../opennms-paxexam-parent) locally if you want to work with snapshots.
+
+The example test projects contain repository references to allow them to download releases of the published system.
+At the moment, the system is being published to a github packages maven repository associated with the github opennms-paxexam project.
+This will change in future releases.
+
+```
+   <repositories>
+      <repository>
+         <id>central</id>
+         <url>https://repo1.maven.org/maven2</url>
+      </repository>
+      <repository>
+         <id>github</id>
+         <url>https://maven.pkg.github.com/gallenc/opennms-paxexam</url>
+         <snapshots>
+            <!-- we only publish release versions of opennms-paxexam to github packages -->
+            <enabled>false</enabled> 
+         </snapshots>
+      </repository>
+   </repositories>
+```
+
+Change the opennms-paxexam.version property to use a different published version of opennms-paxexam (e.g. 0.0.1)
+
+```
+   <properties>
+      ...
+      <opennms-paxexam.version>0.0.1-SNAPSHOT</opennms-paxexam.version>
+      ...
+   </properties>
+```
+
 ## Credits and Licensing
 
 This project is licensed under the Apache 2 licence.

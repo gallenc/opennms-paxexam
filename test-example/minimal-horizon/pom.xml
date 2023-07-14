@@ -171,4 +171,19 @@
       </plugins>
    </build>
 
+   <repositories>
+      <repository>
+         <id>central</id>
+         <url>https://repo1.maven.org/maven2</url>
+      </repository>
+      <repository>
+         <id>github</id>
+         <url>https://maven.pkg.github.com/gallenc/opennms-paxexam</url>
+         <snapshots>
+            <!-- we only publish release versions of opennms-paxexam to github packages -->
+            <enabled>false</enabled> 
+         </snapshots>
+      </repository>
+   </repositories>
+   
 </project>
