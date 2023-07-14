@@ -82,8 +82,9 @@ For stability, only release versions are published.
 Build [opennms-paxexam-parent](../opennms-paxexam-parent) locally if you want to work with snapshots.
 
 The example test projects contain repository references to allow them to download releases of the published system.
-At the moment, the system is being published to a github packages maven repository associated with the github opennms-paxexam project.
-This will change in future releases.
+
+At the moment, the opennms-paxexam system is being published to a [github packages maven repository](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-apache-maven-registry) associated with the github opennms-paxexam project.
+This will probably change in future releases.
 
 ```
    <repositories>
