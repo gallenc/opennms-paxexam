@@ -22,6 +22,9 @@ More advanced examples with videos are also provided in  [misc-examples](../main
 
 See issues and known work-arounds at  [FAQ issues](../main/docs/FAQ-issues.md)
 
+## Release Notes
+See [Release Notes](../main/RELEASENOTES.md) for details on the latest release.
+
 ## Overview
 [Pax-Exam](https://ops4j1.jira.com/wiki/spaces/PAXEXAM4/overview) is a fantastic test framework which supports in-container testing.
  
