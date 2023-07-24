@@ -2,7 +2,7 @@
 version: '3'
 
 # using fixed ip addresses so opennms config works
-# to see all netowrk use docker network ls
+# to see all network use docker network ls
 # to see config use docker network inspect minimal-minion-kafka_frontend
 # note gateway is 172.20.0.1 
 networks:

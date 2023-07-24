@@ -20,6 +20,8 @@ For a brief video tutorial see:
 
 More advanced examples with videos are also provided in  [misc-examples](../main/misc-examples)
 
+See issues and known work-arounds at  [FAQ issues](../main/docs/FAQ-issues.md)
+
 ## Overview
 [Pax-Exam](https://ops4j1.jira.com/wiki/spaces/PAXEXAM4/overview) is a fantastic test framework which supports in-container testing.
  
